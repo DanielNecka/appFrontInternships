@@ -1,0 +1,120 @@
+// tbody tr {
+//     cursor: pointer;
+// }
+
+section {
+    h1 {
+        margin-left: 6%;
+        margin-top: 20px;
+        font-weight: 700;
+
+        color: #ffffff;
+    }
+
+    .tittle{
+        margin-left: 6%;
+        font-size: 25px;
+        margin-top: 25px;
+        font-weight: 400;
+
+        color: gray;
+    }
+
+    .container {
+        width: 100%;
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 15px;
+            row-gap: 30px;
+
+            .carCard {
+                width: 250px;
+                height: 250px;
+                border-radius: 10px;
+                box-sizing: border-box;
+                padding: 15px;
+                background-color: #212529;
+                border: solid 2px gray;
+                cursor: pointer;
+
+                .carRow {
+                    display: flex;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    box-sizing: border-box;
+
+                    display: flex;
+                    justify-content: space-between;
+
+                    p {
+                        font-size: 20px;
+                        color: gray;
+                    }
+
+                    .bold {
+                        font-weight: 600;
+                    }
+                }
+            }
+
+            .carCard:hover {
+                background-color: rgba(128, 128, 128, 0.108);
+            }
+        }
+    }
+
+    nav {
+        padding-top: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.paginator {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  user-select: none;
+
+  ul {
+    display: flex;
+    gap: 12px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  li {
+    background-color: #2f3338;
+    color: #e1e1e1;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 14px;
+    min-width: 60px;
+    text-align: center;
+
+    &:hover {
+      background-color: #3c4045;
+    }
+
+    &.current {
+      background-color: #495057;
+      font-weight: bold;
+      cursor: default;
+    }
+
+    &.disabled {
+      opacity: 0.4;
+      cursor: default;
+
+      &:hover {
+        background-color: #2f3338;
+      }
+    }
+  }
+}

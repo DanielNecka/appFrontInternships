@@ -1,0 +1,30 @@
+<section class="car-details">
+	<h1>Szczegóły pojazdu</h1>
+	<p class="tittle">Poznaj parametry wybranego samochodu</p>
+
+		<div class="card">
+            <div class="row">
+				<p>ID pojazdu:</p>
+				<p class="value">#{{ car.id }}</p>
+			</div>
+			<div class="row">
+				<p>marka:</p>
+				<p class="value">{{ car.brand }}</p>
+			</div>
+
+			<div class="row">
+				<p>model:</p>
+				<p class="value">{{ car.model }}</p>
+			</div>
+
+			<div class="row">
+				<p>cena za godzinę:</p>
+				<p class="value">{{ car.price }} zł</p>
+			</div>
+        </div>
+
+
+	<button class="back" type="button" [routerLink]="['/main-car']">
+		‹ Powrót do listy
+	</button>
+</section>

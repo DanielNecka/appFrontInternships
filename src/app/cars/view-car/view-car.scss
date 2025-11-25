@@ -1,0 +1,66 @@
+section {
+	padding: 30px 6%;
+}
+
+.car-details {
+	max-width: 960px;
+
+	h1 {
+		margin: 10px 0;
+		font-weight: 700;
+		color: #ffffff;
+	}
+
+	.tittle {
+		font-size: 20px;
+		color: gray;
+		margin-bottom: 30px;
+	}
+
+	.back {
+		background: transparent;
+		border: 1px solid gray;
+		color: #e1e1e1;
+		padding: 8px 18px;
+		border-radius: 999px;
+		cursor: pointer;
+		transition: 0.2s;
+		margin: 25px 0 20px;
+
+		&:hover {
+			background-color: rgba(128, 128, 128, 0.1);
+		}
+	}
+
+	.card {
+		background-color: #212529;
+		border: 2px solid gray;
+		border-radius: 16px;
+		padding: 25px;
+		max-width: 520px;
+	}
+
+	.row {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 12px 0;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+		&:last-of-type {
+			border-bottom: none;
+		}
+
+		p {
+			color: gray;
+			font-size: 18px;
+			margin: 0;
+		}
+
+		.value {
+			font-weight: 600;
+			color: #ffffff;
+			font-size: 20px;
+		}
+	}
+}
