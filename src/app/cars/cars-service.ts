@@ -6,9 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CarsService {
-  constructor() {}
+  constructor(
+    private readonly http: HttpClient
+  ) {}
 
-  // getAllCars(): Observable<any> {
-  //   return 
-  // }
+  getAllCars(): Observable<any> {
+    return this.http.get('http://localhost:3000/car');
+  }
 }
