@@ -12,6 +12,6 @@ import { AppRoutingModule } from "../app-routing-module";
   imports: [
     CommonModule,
     AppRoutingModule
-]
+  ]
 })
 export class CarsModule { }

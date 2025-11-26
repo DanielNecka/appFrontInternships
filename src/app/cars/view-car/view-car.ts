@@ -9,9 +9,7 @@ import { CarsService } from '../cars-service';
   styleUrl: './view-car.scss',
 })
 export class ViewCar implements OnInit {
-  car: any = null;
-  loading = true;
-  error: string | null = null;
+  car: any;
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -21,21 +19,12 @@ export class ViewCar implements OnInit {
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    if (!id) {
-      this.error = 'Nieprawidłowe ID samochodu.';
-      this.loading = false;
-      return;
-    }
+    this.getCar(id);
+  }
 
-    this.carService.getCarById(id).subscribe({
-      next: (data) => {
-        this.car = data;
-        this.loading = false;
-      },
-      error: () => {
-        this.error = 'Nie udało się pobrać danych samochodu.';
-        this.loading = false;
-      },
-    });
+  getCar(id: number): void {
+    this.carService.getCarById(id).subscribe(data => {
+      this.car = data;
+    })
   }
 }

@@ -15,7 +15,8 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     BrowserModule,
     AppRoutingModule,
     RouterOutlet,
-    RouterLink
+    RouterLink,
+    CarsModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
