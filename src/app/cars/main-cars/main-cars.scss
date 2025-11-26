@@ -1,77 +1,75 @@
-// tbody tr {
-//     cursor: pointer;
-// }
-
 section {
-    h1 {
-        margin-left: 6%;
-        margin-top: 20px;
-        font-weight: 700;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 25px;
+  margin-bottom: 25px;
 
-        color: #ffffff;
+    h2 {
+      margin: 10px 0;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 30px;
     }
 
-    .tittle{
-        margin-left: 6%;
-        font-size: 25px;
-        margin-top: 25px;
-        font-weight: 400;
 
-        color: gray;
-    }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    row-gap: 30px;
 
-    .container {
-        width: 100%;
+    .carCard {
+      width: 250px;
+      height: auto;
+      border-radius: 10px;
+      box-sizing: border-box;
+      padding: 20px;
+      border: solid 2px gray;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); 
-            gap: 15px;
-            row-gap: 30px;
-
-            .carCard {
-                width: 250px;
-                height: 250px;
-                border-radius: 10px;
-                box-sizing: border-box;
-                padding: 15px;
-                background-color: #212529;
-                border: solid 2px gray;
-                cursor: pointer;
-
-                .carRow {
-                    display: flex;
-                    padding-left: 10px;
-                    padding-right: 10px;
-                    box-sizing: border-box;
-
-                    display: flex;
-                    justify-content: space-between;
-
-                    p {
-                        font-size: 20px;
-                        color: gray;
-                    }
-
-                    .bold {
-                        font-weight: 600;
-                    }
-                }
-            }
-
-            .carCard:hover {
-                background-color: rgba(128, 128, 128, 0.108);
-            }
-        }
-    }
-
-    nav {
-        padding-top: 20px;
-        width: 100%;
+      .carRow {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
+        padding: 0 6px;
+        margin: 0;
+        gap: 12px;
+
+        p {
+          font-size: 20px;
+          margin: 0;
+        }
+
+        .gray {
+          color: gray;
+        }
+
+        .bold {
+          font-weight: 600;
+        }
+      }
+
+      .d-grid {
+        margin-top: auto;
+      }
     }
+
+    .carCard:hover {
+      background-color: rgba(128, 128, 128, 0.108);
+    }
+  }
 }
+
+nav {
+  padding-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 
 .paginator {
   display: flex;

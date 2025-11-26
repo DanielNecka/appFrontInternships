@@ -1,48 +1,41 @@
 <section>
-  <h1>Panel sterowania</h1>
-  
-  <p class="tittle">Wszystkie modele:</p>
+  <h2>Wszystkie modele:</h2>
 
-  <div class="container">
-    <div class="grid">
-      <div [routerLink]="['/view-car', car.id]" *ngFor="let car of pagedCars;" class="carCard">
-        <div class="carRow">
-          <p>marka:</p>
+  <div class="grid">
+    <div [routerLink]="['/view-car', car.id]" *ngFor="let car of pagedCars;" class="carCard">
+      <div class="carRow">
+        <p class="gray">marka:</p>
 
-          <p class="bold">{{car.brand}}</p>
-        </div>
-
-        <div class="carRow">
-          <p>model:</p>
-          <p class="bold">{{car.model}}</p>
-        </div>
-
-        <div class="carRow">
-          <p>cena:</p>
-          <p class="bold">{{car.price + 'zł/h'}}</p>
-        </div>
-
-        <div class="d-grid gap-2">
-          <button class="btn btn-outline-warning" type="button">Modyfikuj</button>
-          <button (click)="delCar(car.id, $event)" class="btn btn-outline-danger" type="button">Usuń</button>
-        </div>
+        <p class="bold">{{car.brand}}</p>
       </div>
+
+      <div class="carRow">
+        <p class="gray">model:</p>
+        <p class="bold">{{car.model}}</p>
+      </div>
+
+      <div class="carRow">
+        <p class="gray">cena:</p>
+        <p class="bold">{{car.price + ' zł/h'}}</p>
+      </div>
+
+      <div class="d-grid gap-2">
+				<button class="btn btn-outline-light" type="button">Zobacz szczegóły</button>
+			</div>
     </div>
   </div>
 
-<nav class="paginator" aria-label="Page navigation">
-  <ul>
-    <li (click)="prevPage()" [class.disabled]="page === 1">
-      ‹
-    </li>
+  <nav class="paginator" aria-label="Page navigation">
+    <ul>
+      <li (click)="prevPage()" [class.disabled]="page === 1">
+        ‹
+      </li>
 
-    <li class="current">Strona {{page}}</li>
+      <li class="current">Strona {{page}}</li>
 
-    <li (click)="nextPage()" 
-        [class.disabled]="page * limit >= total">
-      ›
-    </li>
-  </ul>
-</nav>
-
+      <li (click)="nextPage()" [class.disabled]="page * limit >= total">
+        ›
+      </li>
+    </ul>
+  </nav>
 </section>

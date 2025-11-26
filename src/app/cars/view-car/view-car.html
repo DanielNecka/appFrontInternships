@@ -1,25 +1,55 @@
-<section class="car-details">
-	<h1>Szczegóły pojazdu</h1>
+<section>
+	<h2>Szczegóły pojazdu</h2>
 	<p class="tittle">Poznaj parametry wybranego samochodu</p>
 
-	<div class="card" *ngIf="car">
-		<div class="row">
-			<p>ID pojazdu:</p>
-			<p class="value">#{{ car.id }}</p>
-		</div>
-		<div class="row">
-			<p>marka:</p>
-			<p class="value">{{ car.brand }}</p>
+	<div class="layout" *ngIf="car">
+		<div class="card primary">
+			<div class="row">
+				<p>ID pojazdu:</p>
+				<p class="value">#{{ car.id }}</p>
+			</div>
+			<div class="row">
+				<p>marka:</p>
+				<p class="value">{{ car.brand }}</p>
+			</div>
+
+			<div class="row">
+				<p>model:</p>
+				<p class="value">{{ car.model }}</p>
+			</div>
+
+			<div class="row">
+				<p>cena za godzinę:</p>
+				<p class="value">{{ car.price }} zł</p>
+			</div>
+
+			<div class="d-grid gap-2">
+				<button class="btn btn-outline-warning" type="button">Modyfikuj</button>
+				<button (click)="delCar(car.id, $event)" class="btn btn-outline-danger" type="button">Usuń</button>
+			</div>
 		</div>
 
-		<div class="row">
-			<p>model:</p>
-			<p class="value">{{ car.model }}</p>
-		</div>
+		<div class="side-panel">
+			<div class="card secondary">
+				<h3>Dodatkowe szczegóły</h3>
+				<p>
+					{{ car.brand }} {{ car.model }} to sprawdzony model do jazdy po mieście.
+					Poniżej znajdziesz najważniejsze informacje przed rezerwacją.
+				</p>
+				<ul>
+					<li><span>Odbiór:</span> dostępny natychmiast</li>
+					<li><span>Stan:</span> po pełnym serwisie i przeglądzie</li>
+					<li><span>Paliwo:</span> benzyna lub hybryda (w zależności od wersji)</li>
+					<li><span>Limit:</span> 200 km / dzień w cenie podstawowej</li>
+				</ul>
+			</div>
 
-		<div class="row">
-			<p>cena za godzinę:</p>
-			<p class="value">{{ car.price }} zł</p>
+			<div class="card photo-card">
+				<div class="photo-wrapper">
+					<img src="foto.svg" alt="" >
+				</div>
+				<p class="caption">Przykładowe zdjęcie modelu {{ car.brand }} {{ car.model }}</p>
+			</div>
 		</div>
 	</div>
 

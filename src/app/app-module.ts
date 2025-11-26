@@ -6,17 +6,19 @@ import { App } from './app';
 import { CarsModule } from './cars/cars-module';
 import { provideHttpClient } from '@angular/common/http';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { SharedModule } from './shared/shared-module';
 
 @NgModule({
   declarations: [
-    App
+    App 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterOutlet,
     RouterLink,
-    CarsModule
+    CarsModule,
+    SharedModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
