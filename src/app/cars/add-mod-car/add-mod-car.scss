@@ -1,0 +1,44 @@
+form {
+    padding: 20px;
+    background-color: #212529;
+    color: white;
+
+    .input {
+        background-color: #212529;
+        border: 1px solid gray !important;
+    }
+}
+
+form .form-control {
+  background-color: transparent !important;
+  border: 1px solid gray !important;
+  color: #fff; // opcjonalnie, jeśli chcesz jasny tekst
+  box-shadow: none !important; // usuwa niebieskie podświetlenie
+}
+
+form .form-control:focus {
+  background-color: transparent !important;
+  border-color: gray !important;
+  box-shadow: none !important;
+}
+
+input[type="number"] {
+  background: transparent !important;
+  color: #fff;                       // jeśli ciemne tło
+  border: 1px solid gray;
+  box-shadow: none !important;
+}
+
+/* Chrome/Edge/Safari */
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;          /* usuwa domyślne tło */
+  background: transparent !important;
+  display: block;
+  width: 8px;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+}
+
+

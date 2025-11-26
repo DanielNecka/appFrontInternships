@@ -169,3 +169,36 @@ section {
 		}
 	}
 }
+
+:has(.custom-modal) {
+  border-radius: 20px;
+}
+
+.custom-modal {
+  background-color: #212529; 
+  color: white; 
+	
+
+  .modal-header {
+    border-bottom: 1px solid #444; 
+  }
+
+  .modal-body {
+    .main-text {
+      color: white; 
+    }
+
+    .sub-text {
+      color: #a0a0a0; 
+    }
+  }
+
+  .modal-footer {
+    border-top: 1px solid #444; 
+  }
+
+	.btn-close:focus, 
+    .btn-close:active {
+      box-shadow: none !important;       
+	}
+}

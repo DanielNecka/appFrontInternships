@@ -1,59 +1,96 @@
 <section>
-	<h2>Szczegóły pojazdu</h2>
-	<p class="tittle">Poznaj parametry wybranego samochodu</p>
+  <h2>Szczegóły pojazdu</h2>
+  <p class="tittle">Poznaj parametry wybranego samochodu</p>
 
-	<div class="layout" *ngIf="car">
-		<div class="card primary">
-			<div class="row">
-				<p>ID pojazdu:</p>
-				<p class="value">#{{ car.id }}</p>
-			</div>
-			<div class="row">
-				<p>marka:</p>
-				<p class="value">{{ car.brand }}</p>
-			</div>
+  @if (car) {
+    <div class="layout">
+      <div class="card primary">
+        <div class="row">
+          <p>ID pojazdu:</p>
+          <p class="value">#{{ car.id }}</p>
+        </div>
+        <div class="row">
+          <p>marka:</p>
+          <p class="value">{{ car.brand }}</p>
+        </div>
+        <div class="row">
+          <p>model:</p>
+          <p class="value">{{ car.model }}</p>
+        </div>
+        <div class="row">
+          <p>cena za godzinę:</p>
+          <p class="value">{{ car.price }} zł</p>
+        </div>
+        <div class="d-grid gap-2">
+          <button (click)="openModal('add', $event)" class="btn btn-outline-warning" type="button">Modyfikuj</button>
+          <button (click)="openDeleteModal(car.id, $event)" class="btn btn-outline-danger" type="button">Usuń</button>
+        </div>
+      </div>
+      <div class="side-panel">
+        <div class="card secondary">
+          <h3>Dodatkowe szczegóły</h3>
+          <p>
+            {{ car.brand }} {{ car.model }} to sprawdzony model do jazdy po mieście.
+            Poniżej znajdziesz najważniejsze informacje przed rezerwacją.
+          </p>
+          <ul>
+            <li><span>Odbiór:</span> dostępny natychmiast</li>
+            <li><span>Stan:</span> po pełnym serwisie i przeglądzie</li>
+            <li><span>Paliwo:</span> benzyna lub hybryda (w zależności od wersji)</li>
+            <li><span>Limit:</span> 200 km / dzień w cenie podstawowej</li>
+          </ul>
+        </div>
+        <div class="card photo-card">
+          <div class="photo-wrapper">
+            <img src="foto.svg" alt="" >
+          </div>
+          <p class="caption">Przykładowe zdjęcie modelu {{ car.brand }} {{ car.model }}</p>
+        </div>
+      </div>
+    </div>
+  }
 
-			<div class="row">
-				<p>model:</p>
-				<p class="value">{{ car.model }}</p>
-			</div>
+  <button class="back" type="button" routerLink="/main-cars">
+    ‹ Powrót do listy
+  </button>
 
-			<div class="row">
-				<p>cena za godzinę:</p>
-				<p class="value">{{ car.price }} zł</p>
-			</div>
+  <ng-template #deleteConfirmModal let-modal>
+  <div class="app-modal delete-modal custom-modal">
+    <div class="modal-header">
+      <h4 class="modal-title">Potwierdzenie usunięcia</h4>
+      <button type="button" class="btn-close" aria-label="Zamknij" (click)="modal.dismiss()"></button>
+    </div>
+    <div class="modal-body">
+      <p class="main-text">
+        Czy na pewno chcesz usunąć samochód
+        <strong>{{ car?.brand }} {{ car?.model }}</strong>?
+      </p>
+      <p class="sub-text mb-0">Operacji nie można cofnąć.</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss()">Anuluj</button>
+      <button type="button" class="btn btn-danger" [disabled]="isDeleting" (click)="confirmDelete(modal)">
+        <span *ngIf="isDeleting" class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+        Usuń
+      </button>
+    </div>
+  </div>
+</ng-template>
 
-			<div class="d-grid gap-2">
-				<button class="btn btn-outline-warning" type="button">Modyfikuj</button>
-				<button (click)="delCar(car.id, $event)" class="btn btn-outline-danger" type="button">Usuń</button>
-			</div>
-		</div>
 
-		<div class="side-panel">
-			<div class="card secondary">
-				<h3>Dodatkowe szczegóły</h3>
-				<p>
-					{{ car.brand }} {{ car.model }} to sprawdzony model do jazdy po mieście.
-					Poniżej znajdziesz najważniejsze informacje przed rezerwacją.
-				</p>
-				<ul>
-					<li><span>Odbiór:</span> dostępny natychmiast</li>
-					<li><span>Stan:</span> po pełnym serwisie i przeglądzie</li>
-					<li><span>Paliwo:</span> benzyna lub hybryda (w zależności od wersji)</li>
-					<li><span>Limit:</span> 200 km / dzień w cenie podstawowej</li>
-				</ul>
-			</div>
+  <ng-template #infoModal let-modal>
+  <div class="app-modal custom-modal">
+    <div class="modal-header">
+      <h4 class="modal-title">{{ infoModalData.title }}</h4>
+      <button type="button" class="btn-close" aria-label="Zamknij" (click)="modal.dismiss()"></button>
+    </div>
+    <div class="modal-body">
+      <p class="main-text mb-0">{{ infoModalData.body }}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.close()">Zamknij</button>
+    </div>
+  </div>
+</ng-template>
 
-			<div class="card photo-card">
-				<div class="photo-wrapper">
-					<img src="foto.svg" alt="" >
-				</div>
-				<p class="caption">Przykładowe zdjęcie modelu {{ car.brand }} {{ car.model }}</p>
-			</div>
-		</div>
-	</div>
-
-	<button class="back" type="button" routerLink="/main-cars">
-		‹ Powrót do listy
-	</button>
 </section>

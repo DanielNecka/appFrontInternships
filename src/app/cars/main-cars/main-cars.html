@@ -2,30 +2,31 @@
   <h2>Wszystkie modele:</h2>
 
   <div class="grid">
-    <div [routerLink]="['/view-car', car.id]" *ngFor="let car of pagedCars;" class="carCard">
-      <div class="carRow">
-        <p class="gray">marka:</p>
-
-        <p class="bold">{{car.brand}}</p>
+    @for (car of pagedCars; track car) {
+      <div [routerLink]="['/view-car', car.id]" class="carCard">
+        <div class="carRow">
+          <p class="gray">marka:</p>
+          <p class="bold">{{car.brand}}</p>
+        </div>
+        <div class="carRow">
+          <p class="gray">model:</p>
+          <p class="bold">{{car.model}}</p>
+        </div>
+        <div class="carRow">
+          <p class="gray">cena:</p>
+          <p class="bold">{{car.price + ' zł/h'}}</p>
+        </div>
+        <div class="d-grid gap-2">
+          <button class="btn btn-outline-secondary" type="button">Zobacz szczegóły</button>
+        </div>
       </div>
-
-      <div class="carRow">
-        <p class="gray">model:</p>
-        <p class="bold">{{car.model}}</p>
-      </div>
-
-      <div class="carRow">
-        <p class="gray">cena:</p>
-        <p class="bold">{{car.price + ' zł/h'}}</p>
-      </div>
-
-      <div class="d-grid gap-2">
-				<button class="btn btn-outline-light" type="button">Zobacz szczegóły</button>
-			</div>
-    </div>
+    }
   </div>
 
   <nav class="paginator" aria-label="Page navigation">
+    <button (click)="openModal('add', $event)" class="btn btn-outline-success" type="button" routerLink="/main-cars">
+      Dodaj Samochód
+    </button>
     <ul>
       <li (click)="prevPage()" [class.disabled]="page === 1">
         ‹

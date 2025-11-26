@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CarsService } from '../cars-service';
 import { CarModel } from '../../models/car-model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddModCar } from '../add-mod-car/add-mod-car';
 
 @Component({
   selector: 'app-main-cars',
@@ -10,7 +12,8 @@ import { CarModel } from '../../models/car-model';
 })
 export class MainCars implements OnInit {
   constructor(
-    private readonly carService: CarsService
+    private readonly carService: CarsService,
+    private readonly modalService: NgbModal
   ) { }
 
   cars: CarModel[] = [];
@@ -52,5 +55,9 @@ export class MainCars implements OnInit {
       this.page--;
       this.updatePage();
     }
+  }
+
+  openModal(action?: string, event?: Event): void {
+    this.modalService.open(AddModCar, {size: 'md'});
   }
 }

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CarModel } from '../../models/car-model';
 import { CarsService } from '../cars-service';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddModCar } from '../add-mod-car/add-mod-car';
 
 @Component({
   selector: 'app-view-car',
@@ -11,11 +13,20 @@ import { CarsService } from '../cars-service';
 })
 export class ViewCar implements OnInit {
   car: CarModel | null = null;
+  @ViewChild('deleteConfirmModal') deleteConfirmModal?: TemplateRef<unknown>;
+  @ViewChild('infoModal') infoModal?: TemplateRef<unknown>;
+  pendingDeleteId: number | null = null;
+  isDeleting = false;
+  infoModalData = {
+    title: '',
+    body: ''
+  };
 
   constructor(
     private readonly route: ActivatedRoute,
     private readonly carService: CarsService,
     private readonly router: Router,
+    private readonly modalService: NgbModal,
   ) {}
 
   ngOnInit(): void {
@@ -30,23 +41,69 @@ export class ViewCar implements OnInit {
     });
   }
 
-  delCar(id: number | undefined, event: Event): void {
+  openDeleteModal(id: number | undefined, event: Event): void {
     event.stopPropagation();
     if (typeof id !== 'number') {
-      alert('Brak identyfikatora pojazdu. Odśwież widok i spróbuj ponownie.');
+      this.showInfoModal(
+        'Brak identyfikatora',
+        'Brak identyfikatora pojazdu. Odśwież widok i spróbuj ponownie.'
+      );
       return;
     }
-    const confirmDelete = confirm('Czy chcesz usunąć ten samochód?');
-
-    if (!confirmDelete) {
+    if (!this.deleteConfirmModal) {
       return;
     }
 
-    this.carService.delCar(id).subscribe({
+    this.pendingDeleteId = id;
+    this.modalService.open(this.deleteConfirmModal, {
+      centered: true,
+      backdrop: 'static',
+      keyboard: false
+    });
+  }
+
+  confirmDelete(modal: NgbActiveModal): void {
+    if (this.pendingDeleteId === null) {
+      modal.dismiss();
+      return;
+    }
+    this.isDeleting = true;
+
+    this.carService.delCar(this.pendingDeleteId).subscribe({
       next: () => {
-        alert('Samochód został usunięty.');
-        this.router.navigate(['/main-cars']);
+        this.isDeleting = false;
+        this.pendingDeleteId = null;
+        modal.close('deleted');
+        this.showInfoModal(
+          'Samochód usunięty',
+          'Samochód został usunięty z bazy danych.',
+          () => this.router.navigate(['/main-cars'])
+        );
+      },
+      error: () => {
+        this.isDeleting = false;
+        modal.dismiss('error');
+        this.showInfoModal(
+          'Błąd',
+          'Nie udało się usunąć samochodu. Spróbuj ponownie później.'
+        );
       }
     });
+  }
+
+  private showInfoModal(title: string, body: string, onClose?: () => void): void {
+    if (!this.infoModal) {
+      onClose?.();
+      return;
+    }
+
+    this.infoModalData = { title, body };
+    const modalRef = this.modalService.open(this.infoModal, { centered: true });
+
+    modalRef.result.finally(() => onClose?.());
+  }
+
+  openModal(action?: string, event?: Event): void {
+    this.modalService.open(AddModCar, {size: 'md'});
   }
 }
