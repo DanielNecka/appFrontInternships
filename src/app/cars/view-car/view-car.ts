@@ -30,12 +30,12 @@ export class ViewCar implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-
-    this.getCar(id);
+    this.getCar();
   }
 
-  getCar(id: number): void {
+  getCar(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+
     this.carService.getCarById(id).subscribe(data => {
       this.car = data;
     });
@@ -116,26 +116,10 @@ export class ViewCar implements OnInit {
 
     modalRef.result.then(
       (result) => {
-        if (!result) {
-          return;
-        }
-
         const res = result.save;
 
-        if (res) {
-          const id = carFromHtml?.id ?? this.car?.id;
-
-          if (typeof id === 'number') {
-            this.getCar(id);
-          }
-
-          this.showInfoModal(
-            'Dane zapisane',
-            'Pomyślnie zaktualizowano dane tego pojazdu.'
-          );
-        }
+        this.getCar()
       }
-    ).catch(() => { /* modal dismissed */ });
+    );
   }
-
 }

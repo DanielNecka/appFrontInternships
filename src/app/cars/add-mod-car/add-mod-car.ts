@@ -51,70 +51,33 @@ export class AddModCar implements OnInit {
     this.activateModal.dismiss();
   }
 
-  private saveModification(): void {
-    if (!this.car?.id) {
-      return;
-    }
-    
-    const payload = this.resolvePayload();
+  private saveModification(): void {    
+    if (!this.car || !this.car.id) return; 
 
-    if (!payload) {
-      return;
-    }
+    const car: any = this.loadData(); 
 
-    this.carsService.updateCar(this.car.id, payload).subscribe({
+    this.carsService.updateCar(this.car.id, car).subscribe({
       next: () => {
-        this.isSaving = false;
-        const updatedCar = this.car ? { ...this.car, ...payload } : payload;
-        this.activateModal.close({ save: true, action: 'mod', updatedCar });
+        this.activateModal.close({});
       }
     });
   }
 
   private saveAddition(): void {
-    this.isSaving = true;
-    const payload = this.resolvePayload();
+    const car: any  = this.loadData();
 
-    if (!payload) {
-      this.isSaving = false;
-      return;
-    }
-
-    this.carsService.addCar(payload).subscribe({
+    this.carsService.addCar(car).subscribe({
       next: (response: AddCarResponse) => {
-        this.isSaving = false;
-        const addedCar = response.addedCar ?? payload;
-        this.activateModal.close({
-          save: true,
-          action: 'add',
-          addedCar,
-          message: response.message,
-        });
+        this.activateModal.close({});
       }
     });
   }
 
-  private resolvePayload(): CarModel | null {
+  private loadData(): CarModel | null {
     const brand = this.formData.brand.trim();
     const model = this.formData.model.trim();
-    const priceRaw = `${this.formData.price ?? ''}`.trim();
+    const price = Number(`${this.formData.price ?? ''}`.trim());
 
-    if (!brand || !model) {
-      this.errorMessage = 'Marka i model są wymagane.';
-      return null;
-    }
-
-    if (!priceRaw) {
-      this.errorMessage = 'Cena jest wymagana.';
-      return null;
-    }
-
-    const price = Number(priceRaw);
-
-    if (!Number.isFinite(price) || price < 0) {
-      this.errorMessage = 'Cena musi być liczbą większą lub równą zero.';
-      return null;
-    }
 
     return { brand, model, price };
   }

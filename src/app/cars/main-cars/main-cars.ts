@@ -70,13 +70,9 @@ export class MainCars implements OnInit {
 
     modalRef.result.then(
       (result) => {
-        if (!result?.save) {
-          return;
-        }
-
         this.page = 1;
         this.getAllCars();
       }
-    ).catch(() => { /* modal dismissed */ });
+    );
   }
 }
