@@ -103,7 +103,39 @@ export class ViewCar implements OnInit {
     modalRef.result.finally(() => onClose?.());
   }
 
-  openModal(action?: string, event?: Event): void {
-    this.modalService.open(AddModCar, {size: 'md'});
+  openModal(action?: string, event?: Event, carFromHtml?: CarModel): void {
+    if (action === 'mod') {
+      event?.stopPropagation();
+      event?.preventDefault();
+    }
+
+    const modalRef = this.modalService.open(AddModCar, {size: 'md'});
+
+    modalRef.componentInstance.car = carFromHtml;
+    modalRef.componentInstance.mode = action === 'mod' ? 'mod' : 'add';
+
+    modalRef.result.then(
+      (result) => {
+        if (!result) {
+          return;
+        }
+
+        const res = result.save;
+
+        if (res) {
+          const id = carFromHtml?.id ?? this.car?.id;
+
+          if (typeof id === 'number') {
+            this.getCar(id);
+          }
+
+          this.showInfoModal(
+            'Dane zapisane',
+            'Pomyślnie zaktualizowano dane tego pojazdu.'
+          );
+        }
+      }
+    ).catch(() => { /* modal dismissed */ });
   }
+
 }

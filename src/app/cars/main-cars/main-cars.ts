@@ -57,7 +57,26 @@ export class MainCars implements OnInit {
     }
   }
 
-  openModal(action?: string, event?: Event): void {
-    this.modalService.open(AddModCar, {size: 'md'});
+  openModal(action?: string, event?: Event, carFromHtml?: CarModel): void {
+    if (action === 'add' || action === 'mod') {
+      event?.stopPropagation();
+      event?.preventDefault();
+    }
+
+    const modalRef = this.modalService.open(AddModCar, {size: 'md'});
+
+    modalRef.componentInstance.car = carFromHtml;
+    modalRef.componentInstance.mode = action === 'mod' ? 'mod' : 'add';
+
+    modalRef.result.then(
+      (result) => {
+        if (!result?.save) {
+          return;
+        }
+
+        this.page = 1;
+        this.getAllCars();
+      }
+    ).catch(() => { /* modal dismissed */ });
   }
 }
