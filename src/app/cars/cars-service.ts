@@ -18,23 +18,23 @@ export class CarsService {
     private readonly http: HttpClient
   ) {}
 
-  getAllCars(): Observable<CarModel[]> {
+  public getAllCars(): Observable<CarModel[]> {
     return this.http.get<CarModel[]>(`${this.apiUrl}/car`);
   }
 
-  getCarById(id: number): Observable<CarModel> {
+  public getCarById(id: number): Observable<CarModel> {
     return this.http.get<CarModel>(`${this.apiUrl}/car/${id}`);
   }
 
-  delCar(id: number): Observable<string> {
+  public delCar(id: number): Observable<string> {
     return this.http.delete(`${this.apiUrl}/car/${id}`, { responseType: 'text' });
   }
 
-  addCar(car: CarModel): Observable<AddCarResponse> {
+  public addCar(car: CarModel): Observable<AddCarResponse> {
     return this.http.post<AddCarResponse>(`${this.apiUrl}/car`, car);
   }
 
-  updateCar(id: number, car: CarModel): Observable<string> {
+  public updateCar(id: number, car: CarModel): Observable<string> {
     return this.http.patch<string>(`${this.apiUrl}/car/${id}`, car, {
       responseType: 'text' as 'json'
     });

@@ -16,8 +16,6 @@ export class AddModCar implements OnInit {
   @Input() mode: 'add' | 'mod' = 'add';
 
   CarInputForm!: CarModel;
-  errorMessage = '';
-  isSaving = false;
 
   constructor(
     public readonly activateModal: NgbActiveModal,
