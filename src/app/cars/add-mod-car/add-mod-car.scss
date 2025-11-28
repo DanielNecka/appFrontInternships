@@ -18,7 +18,20 @@ form {
       border-color: gray !important;
       box-shadow: none !important;
     }
+
+    &.is-invalid {
+      border-color: #dc3545 !important;
+      color: #dc3545;
+    }
   }
+}
+
+label.text-danger {
+  color: #dc3545 !important;
+}
+
+.invalid-feedback {
+  color: #dc3545;
 }
 
 input[type="number"] {

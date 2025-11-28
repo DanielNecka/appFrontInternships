@@ -1,44 +1,71 @@
 <form #carForm="ngForm" (ngSubmit)="onSave(carForm)">
     <div class="mb-3">
-        <label for="brand" class="form-label">Marka</label>
+        <label
+            for="brand"
+            class="form-label"
+            [class.text-danger]="brand.invalid && brand.touched"
+        >Marka
+        </label>
+
         <input
             id="brand"
             name="brand"
             [(ngModel)]="CarInputForm.brand"
             class="form-control"
+            #brand = "ngModel"
             required
+            pattern="^[A-ź\s]{3,20}$"
             autocomplete="off"
+            [ngClass]="{'is-invalid': brand.invalid && brand.touched}"
         >
     </div>
 
     <div class="mb-3">
-        <label for="model" class="form-label">Model</label>
+        <label
+            for="model"
+            class="form-label"
+            [class.text-danger]="model.invalid && brand.touched"
+        >Model
+        </label>
+
         <input
             id="model"
             name="model"
             [(ngModel)]="CarInputForm.model"
             class="form-control"
+            #model = "ngModel"
             required
+            pattern="^[A-ź\s0-9\-_]{1,20}$"
             autocomplete="off"
+            [ngClass]="{'is-invalid': model.invalid && brand.touched}"
         >
     </div>
 
     <div class="mb-3">
-        <label for="price" class="form-label">Cena (zł/h)</label>
+        <label 
+            for="price" 
+            class="form-label"
+            [class.text-danger]="price.invalid && price.touched"
+        >Cena (zł/h)
+        </label>
+        
         <input
             id="price"
             name="price"
             type="number"
             [(ngModel)]="CarInputForm.price"
             class="form-control"
+            #price="ngModel"
             required
             min="0"
+            max="9999"
             step="0.01"
+            [ngClass]="{'is-invalid': price.invalid && price.touched}"
         >
     </div>
 
     <div class="d-flex justify-content-end gap-2 mt-3">
         <button class="btn btn-outline-secondary" type="button" (click)="close()">Wyjdź</button>
-        <button class="btn btn-secondary" type="submit">Zapisz</button>
+        <button class="btn btn-secondary" type="submit" [disabled]="carForm.invalid">Zapisz</button>
     </div>
 </form>
