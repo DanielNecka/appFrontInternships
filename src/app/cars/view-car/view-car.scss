@@ -1,13 +1,11 @@
 section {
 	width: 90%;
-	margin-left: 5%;
-	margin-top: 25px;
-	margin-bottom: 25px;
+	margin: 25px 5%;
 
 	h2 {
 		margin: 10px 0;
 		font-weight: 700;
-		color: #ffffff;
+		color: #fff;
 	}
 
 	.tittle {
@@ -27,26 +25,26 @@ section {
 		margin: 25px 0 20px;
 
 		&:hover {
-			background-color: rgba(128, 128, 128, 0.1);
+			background: rgba(128, 128, 128, 0.1);
 		}
 	}
 
 	.card {
-		background-color: #212529;
+		background: #212529;
 		border: 2px solid gray;
 		border-radius: 16px;
 		padding: 25px;
 		width: 100%;
-	}
 
-	.card.primary {
-		display: flex;
-		flex-direction: column;
-		gap: 12px;
-		min-height: 100%;
+		&.primary {
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+			min-height: 100%;
 
-		.d-grid {
-			margin-top: auto;
+			.d-grid {
+				margin-top: auto;
+			}
 		}
 	}
 
@@ -74,9 +72,8 @@ section {
 
 	.secondary {
 		h3 {
-			margin-top: 0;
-			margin-bottom: 12px;
-			color: #ffffff;
+			margin: 0 0 12px;
+			color: #fff;
 		}
 
 		p {
@@ -96,7 +93,7 @@ section {
 
 				span {
 					font-weight: 600;
-					color: #ffffff;
+					color: #fff;
 				}
 			}
 		}
@@ -122,10 +119,10 @@ section {
 			height: auto;
 			object-fit: contain;
 			transition: transform 0.3s ease;
-		}
 
-		img:hover {
-			transform: scale(1.03);
+			&:hover {
+				transform: scale(1.03);
+			}
 		}
 
 		.caption {
@@ -164,41 +161,42 @@ section {
 
 		.value {
 			font-weight: 600;
-			color: #ffffff;
+			color: #fff;
 			font-size: 20px;
 		}
 	}
 }
 
 :has(.custom-modal) {
-  border-radius: 20px;
+	border-radius: 20px;
 }
 
 .custom-modal {
-  background-color: #212529; 
-  color: white; 
-	
+	background: #212529;
+	color: #fff;
 
-  .modal-header {
-    border-bottom: 1px solid #444; 
-  }
+	.modal-header {
+		border-bottom: 1px solid #444;
+	}
 
-  .modal-body {
-    .main-text {
-      color: white; 
-    }
+	.modal-body {
+		.main-text {
+			color: #fff;
+		}
 
-    .sub-text {
-      color: #a0a0a0; 
-    }
-  }
+		.sub-text {
+			color: #a0a0a0;
+		}
+	}
 
-  .modal-footer {
-    border-top: 1px solid #444; 
-  }
+	.modal-footer {
+		border-top: 1px solid #444;
+	}
 
-	.btn-close:focus, 
-    .btn-close:active {
-      box-shadow: none !important;       
+	.btn-close {
+		&:focus,
+		&:active {
+			box-shadow: none !important;
+		}
 	}
 }

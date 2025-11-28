@@ -104,21 +104,17 @@ export class ViewCar implements OnInit {
   }
 
   openModal(action?: string, event?: Event, carFromHtml?: CarModel): void {
-    if (action === 'mod') {
-      event?.stopPropagation();
-      event?.preventDefault();
-    }
+    event?.stopPropagation();
+    event?.preventDefault();
 
     const modalRef = this.modalService.open(AddModCar, {size: 'md'});
 
     modalRef.componentInstance.car = carFromHtml;
-    modalRef.componentInstance.mode = action === 'mod' ? 'mod' : 'add';
+    modalRef.componentInstance.mode = action = 'mod';
 
     modalRef.result.then(
       (result) => {
-        const res = result.save;
-
-        this.getCar()
+        this.getCar();
       }
     );
   }

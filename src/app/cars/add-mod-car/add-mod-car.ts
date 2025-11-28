@@ -4,46 +4,35 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
 import { CarsService, AddCarResponse } from '../cars-service';
 
-type CarFormData = {
-  brand: string;
-  model: string;
-  price: string;
-};
-
 @Component({
   selector: 'app-add-mod-car',
   standalone: false,
   templateUrl: './add-mod-car.html',
   styleUrl: './add-mod-car.scss',
 })
+
 export class AddModCar implements OnInit {
   @Input() car?: CarModel;
   @Input() mode: 'add' | 'mod' = 'add';
 
-  formData: CarFormData = { brand: '', model: '', price: '' };
+  CarInputForm!: CarModel;
   errorMessage = '';
   isSaving = false;
 
   constructor(
     public readonly activateModal: NgbActiveModal,
     private readonly carsService: CarsService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    if (this.car) {
-      this.formData = {
-        brand: this.car.brand,
-        model: this.car.model,
-        price: String(this.car.price),
-      };
-    }
+    this.CarInputForm = this.car ? { ...this.car } : { brand: '', model: '', price: 0 };
   }
 
   onSave(formData: NgForm): void {
     if (this.mode === 'mod') {
-      this.saveModification();
+      this.modifyCar();
     } else {
-      this.saveAddition();
+      this.saveCar();
     }
   }
 
@@ -51,34 +40,31 @@ export class AddModCar implements OnInit {
     this.activateModal.dismiss();
   }
 
-  private saveModification(): void {    
-    if (!this.car || !this.car.id) return; 
+  private loadData(): CarModel {
+    const brand = this.CarInputForm.brand.trim();
+    const model = this.CarInputForm.model.trim();
+    const price = Number(`${this.CarInputForm.price ?? ''}`.trim());
 
-    const car: any = this.loadData(); 
+    return { brand, model, price };
+  }
 
-    this.carsService.updateCar(this.car.id, car).subscribe({
+  private modifyCar(): void {
+    const car: CarModel = this.loadData();
+
+    this.carsService.updateCar(this.car!.id!, car).subscribe({
       next: () => {
         this.activateModal.close({});
       }
     });
   }
 
-  private saveAddition(): void {
-    const car: any  = this.loadData();
+  private saveCar(): void {
+    const car: CarModel = this.loadData();
 
     this.carsService.addCar(car).subscribe({
       next: (response: AddCarResponse) => {
         this.activateModal.close({});
       }
     });
-  }
-
-  private loadData(): CarModel | null {
-    const brand = this.formData.brand.trim();
-    const model = this.formData.model.trim();
-    const price = Number(`${this.formData.price ?? ''}`.trim());
-
-
-    return { brand, model, price };
   }
 }
