@@ -8,7 +8,7 @@ import { CarsService, AddCarResponse } from '../cars-service';
   selector: 'app-add-mod-car',
   standalone: false,
   templateUrl: './add-mod-car.html',
-  styleUrl: './add-mod-car.scss',
+  styleUrls: ['./add-mod-car.scss'],
 })
 
 export class AddModCar implements OnInit {
@@ -16,6 +16,10 @@ export class AddModCar implements OnInit {
   @Input() mode: 'add' | 'mod' = 'add';
 
   CarInputForm!: CarModel;
+  selectedFile: File | null = null;
+  fileError: string | null = null;
+  imagePreviewUrl: string | null = null;
+  readonly fuelTypeOptions = ['Benzyna', 'Diesel', 'Hybrydowy', 'Elektryczny', 'LPG'];
 
   constructor(
     public readonly activateModal: NgbActiveModal,
@@ -23,15 +27,32 @@ export class AddModCar implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.CarInputForm = this.car ? { ...this.car } : { brand: '', model: '', price: 0 };
+    this.CarInputForm = this.car
+      ? { ...this.car }
+      : { brand: '', model: '', price: 0, isRented: false, fuelType: '' };
+
+    if (!this.CarInputForm.fuelType) {
+      this.CarInputForm.fuelType = '';
+    }
+
   }
 
   onSave(formData: NgForm): void {
+    if (formData.invalid) {
+      return;
+    }
+
+    if (this.mode === 'add' && !this.selectedFile) {
+      this.fileError = 'Dodaj zdjęcie samochodu przed zapisaniem.';
+      return;
+    }
+
     if (this.mode === 'mod') {
       this.modifyCar();
-    } else {
-      this.saveCar();
+      return;
     }
+
+    this.saveCar();
   }
 
   close(): void {
@@ -41,9 +62,11 @@ export class AddModCar implements OnInit {
   private loadData(): CarModel {
     const brand = this.CarInputForm.brand.trim();
     const model = this.CarInputForm.model.trim();
-    const price = Number(`${this.CarInputForm.price ?? ''}`.trim());
+    const parsedPrice = Number(`${this.CarInputForm.price ?? ''}`.trim());
+    const price = Number.isFinite(parsedPrice) ? parsedPrice : 0;
+    const fuelType = this.CarInputForm.fuelType?.trim();
 
-    return { brand, model, price };
+    return { brand, model, price, fuelType: fuelType || undefined };
   }
 
   private modifyCar(): void {
@@ -59,10 +82,47 @@ export class AddModCar implements OnInit {
   private saveCar(): void {
     const car: CarModel = this.loadData();
 
-    this.carsService.addCar(car).subscribe({
+    this.carsService.addCar(car, this.selectedFile ?? undefined).subscribe({
       next: (response: AddCarResponse) => {
-        this.activateModal.close({});
+        this.activateModal.close({ addedCar: response.addedCar });
       }
     });
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files && input.files.length ? input.files[0] : null;
+
+    if (!file) {
+      this.selectedFile = null;
+      this.imagePreviewUrl = null;
+      return;
+    }
+
+    if (!file.type.startsWith('image/')) {
+      this.fileError = 'Dozwolone są wyłącznie pliki graficzne (jpg, png, svg itp.).';
+      this.selectedFile = null;
+      this.imagePreviewUrl = null;
+      input.value = '';
+      return;
+    }
+
+    const maxSizeMb = 5;
+    if (file.size > maxSizeMb * 1024 * 1024) {
+      this.fileError = `Plik jest za duży. Maksymalny rozmiar to ${maxSizeMb} MB.`;
+      this.selectedFile = null;
+      this.imagePreviewUrl = null;
+      input.value = '';
+      return;
+    }
+
+    this.fileError = null;
+    this.selectedFile = file;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreviewUrl = typeof reader.result === 'string' ? reader.result : null;
+    };
+    reader.readAsDataURL(file);
   }
 }

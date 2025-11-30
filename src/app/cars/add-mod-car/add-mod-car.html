@@ -64,8 +64,59 @@
         >
     </div>
 
+    <div class="mb-3">
+        <label
+            for="fuelType"
+            class="form-label"
+        >Typ napędu</label>
+
+        <select
+            id="fuelType"
+            name="fuelType"
+            class="form-select"
+            [(ngModel)]="CarInputForm.fuelType"
+            #fuelType="ngModel"
+            required
+        >
+            <option value="" disabled>Wybierz typ napędu</option>
+            @for (type of fuelTypeOptions; track type) {
+                <option [value]="type">{{ type }}</option>
+            }
+        </select>
+        @if (fuelType.invalid && fuelType.touched) {
+            <small class="text-danger">Wybierz typ napędu.</small>
+        }
+    </div>
+
+    @if (mode === 'add') {
+    <div class="mb-3">
+        <label
+            for="image"
+            class="form-label"
+        >Zdjęcie samochodu</label>
+
+        <input
+            id="image"
+            type="file"
+            class="form-control"
+            accept="image/*"
+            (change)="onFileSelected($event)"
+        >
+        @if (fileError) {
+        <small class="text-danger">{{ fileError }}</small>
+        }
+        <small class="text-secondary d-block">Obsługiwane formaty: JPG, PNG, SVG. Maksymalnie 5 MB.</small>
+    </div>
+    }
+
+    @if (mode === 'add' && imagePreviewUrl) {
+    <div class="mb-3 text-center">
+        <img [src]="imagePreviewUrl" alt="Podgląd zdjęcia" class="image-preview">
+    </div>
+    }
+
     <div class="d-flex justify-content-end gap-2 mt-3">
         <button class="btn btn-outline-secondary" type="button" (click)="close()">Wyjdź</button>
-        <button class="btn btn-secondary" type="submit" [disabled]="carForm.invalid">Zapisz</button>
+        <button class="btn btn-secondary" type="submit" [disabled]="carForm.invalid || (mode === 'add' && !selectedFile)">Zapisz</button>
     </div>
 </form>

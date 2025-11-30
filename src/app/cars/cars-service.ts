@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { CarModel } from '../models/car-model';
 
 export interface AddCarResponse {
-  message: string;
+  msg: string;
   addedCar: CarModel;
 }
 
@@ -30,8 +30,22 @@ export class CarsService {
     return this.http.delete(`${this.apiUrl}/car/${id}`, { responseType: 'text' });
   }
 
-  public addCar(car: CarModel): Observable<AddCarResponse> {
-    return this.http.post<AddCarResponse>(`${this.apiUrl}/car`, car);
+  public addCar(car: CarModel, imageFile?: File): Observable<AddCarResponse> {
+    const formData = new FormData();
+    formData.append('brand', car.brand);
+    formData.append('model', car.model);
+    formData.append('price', String(car.price));
+    formData.append('isRented', String(car.isRented ?? false));
+
+    if (car.fuelType) {
+      formData.append('fuelType', car.fuelType);
+    }
+
+    if (imageFile) {
+      formData.append('image', imageFile, imageFile.name);
+    }
+
+    return this.http.post<AddCarResponse>(`${this.apiUrl}/car`, formData);
   }
 
   public updateCar(id: number, car: CarModel): Observable<string> {

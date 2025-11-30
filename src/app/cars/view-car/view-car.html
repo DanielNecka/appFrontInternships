@@ -34,17 +34,17 @@
           Poniżej znajdziesz najważniejsze informacje przed rezerwacją.
         </p>
         <ul>
-          <li><span>Odbiór:</span> dostępny natychmiast</li>
+          <li><span>Stan wynajmu:</span> {{ car.isRented ? 'Wynajęty' : 'Dostępny' }} </li>
           <li><span>Stan:</span> po pełnym serwisie i przeglądzie</li>
-          <li><span>Paliwo:</span> benzyna lub hybryda (w zależności od wersji)</li>
-          <li><span>Limit:</span> 200 km / dzień w cenie podstawowej</li>
+          <li><span>Typ napędu:</span> {{ car.fuelType }} </li>
+          <li><span>Limit:</span> 200 km / dzień w cenie podstawowej</li> 
         </ul>
       </div>
       <div class="card photo-card">
         <div class="photo-wrapper">
-          <img src="foto.svg" alt="">
+          <img src="{{car?.image}}" alt="">
         </div>
-        <p class="caption">Przykładowe zdjęcie modelu {{ car.brand }} {{ car.model }}</p>
+        <p class="caption">Zdjęcie {{ car.brand }} {{ car.model }}</p>
       </div>
     </div>
   </div>
@@ -90,5 +90,4 @@
       </div>
     </div>
   </ng-template>
-
 </section>

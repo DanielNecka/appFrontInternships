@@ -64,6 +64,7 @@ export class MainCars implements OnInit {
     const modalRef = this.modalService.open(AddModCar, {size: 'md'});
 
     modalRef.componentInstance.car = carFromHtml;
+    modalRef.componentInstance.mode = action === 'add' ? 'add' : 'mod';
 
     modalRef.result.then(
       (result) => {

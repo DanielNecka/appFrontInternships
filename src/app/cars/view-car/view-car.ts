@@ -9,7 +9,7 @@ import { AddModCar } from '../add-mod-car/add-mod-car';
   selector: 'app-view-car',
   standalone: false,
   templateUrl: './view-car.html',
-  styleUrl: './view-car.scss',
+  styleUrls: ['./view-car.scss'],
 })
 export class ViewCar implements OnInit {
   car: CarModel | null = null;
@@ -21,6 +21,7 @@ export class ViewCar implements OnInit {
     title: '',
     body: ''
   };
+  private readonly fallbackImage = '/carsImages/placeholder-car.svg';
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -79,14 +80,6 @@ export class ViewCar implements OnInit {
           'Samochód został usunięty z bazy danych.',
           () => this.router.navigate(['/main-cars'])
         );
-      },
-      error: () => {
-        this.isDeleting = false;
-        modal.dismiss('error');
-        this.showInfoModal(
-          'Błąd',
-          'Nie udało się usunąć samochodu. Spróbuj ponownie później.'
-        );
       }
     });
   }
@@ -107,15 +100,37 @@ export class ViewCar implements OnInit {
     event?.stopPropagation();
     event?.preventDefault();
 
-    const modalRef = this.modalService.open(AddModCar, {size: 'md'});
+    const modalRef = this.modalService.open(AddModCar, { size: 'md' });
 
     modalRef.componentInstance.car = carFromHtml;
-    modalRef.componentInstance.mode = action = 'mod';
+    modalRef.componentInstance.mode = action === 'add' ? 'add' : 'mod';
 
     modalRef.result.then(
       (result) => {
         this.getCar();
       }
     );
+  }
+
+  resolveImagePath(image?: string | null): string {
+    if (!image) {
+      return this.fallbackImage;
+    }
+
+    const trimmed = image.trim();
+
+    if (/^https?:\/\//i.test(trimmed) || trimmed.startsWith('data:')) {
+      return trimmed;
+    }
+
+    const normalized = trimmed
+      .replace(/\\+/g, '/')
+      .replace(/^[\\/]+/, '');
+
+    const withPrefix = normalized.startsWith('carsImages/')
+      ? normalized
+      : `carsImages/${normalized}`;
+
+    return `/${withPrefix}`;
   }
 }
