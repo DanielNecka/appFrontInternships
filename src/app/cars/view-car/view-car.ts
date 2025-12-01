@@ -11,6 +11,7 @@ import { AddModCar } from '../add-mod-car/add-mod-car';
   templateUrl: './view-car.html',
   styleUrls: ['./view-car.scss'],
 })
+
 export class ViewCar implements OnInit {
   car: CarModel | null = null;
   @ViewChild('deleteConfirmModal') deleteConfirmModal?: TemplateRef<unknown>;
@@ -21,14 +22,16 @@ export class ViewCar implements OnInit {
     title: '',
     body: ''
   };
-  private readonly fallbackImage = '/carsImages/placeholder-car.svg';
+  fallbackImage: string;
 
   constructor(
     private readonly route: ActivatedRoute,
     private readonly carService: CarsService,
     private readonly router: Router,
     private readonly modalService: NgbModal,
-  ) {}
+  ) {
+    this.fallbackImage = `${this.carService.apiUrl}/uploads/car-images/placeholder-car.svg`;
+  }
 
   ngOnInit(): void {
     this.getCar();
@@ -112,25 +115,4 @@ export class ViewCar implements OnInit {
     );
   }
 
-  resolveImagePath(image?: string | null): string {
-    if (!image) {
-      return this.fallbackImage;
-    }
-
-    const trimmed = image.trim();
-
-    if (/^https?:\/\//i.test(trimmed) || trimmed.startsWith('data:')) {
-      return trimmed;
-    }
-
-    const normalized = trimmed
-      .replace(/\\+/g, '/')
-      .replace(/^[\\/]+/, '');
-
-    const withPrefix = normalized.startsWith('carsImages/')
-      ? normalized
-      : `carsImages/${normalized}`;
-
-    return `/${withPrefix}`;
-  }
 }
