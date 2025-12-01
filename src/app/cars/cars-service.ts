@@ -22,6 +22,10 @@ export class CarsService {
     return this.http.get<CarModel[]>(`${this.apiUrl}/car`);
   }
 
+  public searchCars(search: object): Observable<CarModel[]> {
+    return this.http.post<CarModel[]>(`${this.apiUrl}/car/search`, search);
+  }
+
   public getCarById(id: number): Observable<CarModel> {
     return this.http.get<CarModel>(`${this.apiUrl}/car/${id}`);
   }

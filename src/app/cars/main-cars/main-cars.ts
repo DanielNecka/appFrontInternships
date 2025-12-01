@@ -3,6 +3,8 @@ import { CarsService } from '../cars-service';
 import { CarModel } from '../../models/car-model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddModCar } from '../add-mod-car/add-mod-car';
+import { SearchModel } from '../../models/search-model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-main-cars',
@@ -16,16 +18,42 @@ export class MainCars implements OnInit {
     private readonly modalService: NgbModal
   ) { }
 
-  cars: CarModel[] = [];
-  pagedCars: CarModel[] = [];
+  protected cars: CarModel[] = [];
+  protected pagedCars: CarModel[] = [];
 
-  page: number = 1;
-  limit: number = 8;
-  total: number = 0;
+  protected page: number = 1;
+  protected limit: number = 8;
+  protected total: number = 0;
 
+  protected searchForm: SearchModel = {
+    search: '',
+    column: 'brand'
+  };
+
+  protected searchCarsTable: CarModel[] = [];
 
   ngOnInit() {
     this.getAllCars();
+  }
+
+  searchCars() {
+    let search = {};
+
+    if (this.searchForm.column == 'brand') {
+      search = { brand: this.searchForm.search}
+    }
+
+    if (this.searchForm.column == 'model') {
+      search = { model: this.searchForm.search}
+    }
+
+    if (this.searchForm.column == 'maxPrice') {
+      search = { maxPrice: this.searchForm.search}
+    }
+
+    this.carService.searchCars(search).subscribe(data => {
+      this.searchCarsTable = data;
+    })
   }
 
   getAllCars(): void {
