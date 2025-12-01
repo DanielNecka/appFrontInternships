@@ -30,8 +30,6 @@ export class MainCars implements OnInit {
     column: 'brand'
   };
 
-  protected searchCarsTable: CarModel[] = [];
-
   ngOnInit() {
     this.getAllCars();
   }
@@ -40,19 +38,25 @@ export class MainCars implements OnInit {
     let search = {};
 
     if (this.searchForm.column == 'brand') {
-      search = { brand: this.searchForm.search}
+      search = { brand: this.searchForm.search }
     }
 
     if (this.searchForm.column == 'model') {
-      search = { model: this.searchForm.search}
+      search = { model: this.searchForm.search }
     }
 
     if (this.searchForm.column == 'maxPrice') {
-      search = { maxPrice: this.searchForm.search}
+      search = { maxPrice: this.searchForm.search }
+    }
+
+    if (this.searchForm.column == 'minPrice') {
+      search = { minPrice: this.searchForm.search }
     }
 
     this.carService.searchCars(search).subscribe(data => {
-      this.searchCarsTable = data;
+      this.cars = data;
+      this.total = this.cars.length;
+      this.updatePage();  
     })
   }
 
