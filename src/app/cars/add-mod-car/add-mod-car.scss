@@ -56,6 +56,60 @@ form {
       display: none;
     }
   }
+
+  .form-check.form-switch {
+    padding-left: 3.2rem;
+
+    .form-check-input {
+      width: 2.5rem;
+      height: 1.25rem;
+      margin-left: -3.2rem;
+      background-color: #1f2329;
+      border-color: #495057;
+      cursor: pointer;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+      background-image: none;
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0.2rem;
+        width: 0.9rem;
+        height: 0.9rem;
+        border-radius: 999px;
+        background-color: #adb5bd;
+        transform: translate(0, -50%);
+        transition: transform 0.2s ease, background-color 0.2s ease;
+      }
+
+      &:focus {
+        box-shadow: none;
+        border-color: #6c757d;
+      }
+
+      &:checked {
+        background-color: #6c757d;
+        border-color: #6c757d;
+
+        &::before {
+          transform: translate(0.95rem, -50%);
+          margin-left: 3px;
+          background-color: #f8f9fa;
+        }
+      }
+
+      &:hover {
+        border-color: #868e96;
+      }
+    }
+
+    .form-check-label {
+      color: #e9ecef;
+      cursor: pointer;
+    }
+  }
 }
 
 label.text-danger {

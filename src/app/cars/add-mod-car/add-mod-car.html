@@ -64,6 +64,19 @@
         >
     </div>
 
+    @if (mode === 'mod') {
+    <div class="form-check form-switch mb-3">
+        <input
+            id="isRented"
+            name="isRented"
+            type="checkbox"
+            class="form-check-input"
+            [(ngModel)]="CarInputForm.isRented"
+        >
+        <label class="form-check-label" for="isRented">Zaznacz, jeśli auto jest wynajęte</label>
+    </div>
+    }
+
     <div class="mb-3">
         <label
             for="fuelType"

@@ -28,7 +28,7 @@ export class AddModCar implements OnInit {
 
   ngOnInit(): void {
     this.CarInputForm = this.car
-      ? { ...this.car }
+      ? { ...this.car, isRented: this.car.isRented ?? false }
       : { brand: '', model: '', price: 0, isRented: false, fuelType: '' };
 
     if (!this.CarInputForm.fuelType) {
@@ -66,7 +66,13 @@ export class AddModCar implements OnInit {
     const price = Number.isFinite(parsedPrice) ? parsedPrice : 0;
     const fuelType = this.CarInputForm.fuelType?.trim();
 
-    return { brand, model, price, fuelType: fuelType || undefined };
+    return {
+      brand,
+      model,
+      price,
+      fuelType: fuelType || undefined,
+      isRented: this.CarInputForm.isRented ?? false,
+    };
   }
 
   private modifyCar(): void {

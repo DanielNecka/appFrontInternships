@@ -1,7 +1,12 @@
 <section>
   <form class="searchForm">
-    <input name="searchText" #searchText="ngModel" class="form-control searchBox" [(ngModel)]="searchForm.search" required
-      pattern="^[A-ź\s0-9-]{2,20}$" autocomplete="off" placeholder="Wyszukaj" (keyup)="searchCars()">
+    <div class="searchField">
+      <input name="searchText" #searchText="ngModel" class="form-control searchBox" [(ngModel)]="searchForm.search" required
+        pattern="^[A-ź\s0-9-]{2,20}$" autocomplete="off" placeholder=" " (keyup)="searchCars()">
+      <label for="searchText">
+        <span class="material-symbols-outlined">search</span>
+      </label>
+    </div>
 
       <select class="form-select searchSelect" name="column" #searchText="ngModel" [(ngModel)]="searchForm.column" required>
         <option value="brand">Marka</option>
