@@ -27,38 +27,51 @@ export class MainCars implements OnInit {
 
   protected searchForm: SearchModel = {
     search: '',
-    column: 'brand'
+    column: 'brand',
+    isRented: true,
+    isNotRented: true
   };
+
+  CarInputForm!: CarModel;
 
   ngOnInit() {
     this.getAllCars();
   }
 
   searchCars() {
-    let search = {};
+  let search: any = {};
 
-    if (this.searchForm.column == 'brand') {
-      search = { brand: this.searchForm.search }
-    }
-
-    if (this.searchForm.column == 'model') {
-      search = { model: this.searchForm.search }
-    }
-
-    if (this.searchForm.column == 'maxPrice') {
-      search = { maxPrice: this.searchForm.search }
-    }
-
-    if (this.searchForm.column == 'minPrice') {
-      search = { minPrice: this.searchForm.search }
-    }
-
-    this.carService.searchCars(search).subscribe(data => {
-      this.cars = data;
-      this.total = this.cars.length;
-      this.updatePage();  
-    })
+  if (this.searchForm.column == 'brand' && this.searchForm.search) {
+    search.brand = this.searchForm.search;
   }
+
+  if (this.searchForm.column == 'model' && this.searchForm.search) {
+    search.model = this.searchForm.search;
+  }
+
+  if (this.searchForm.column == 'maxPrice' && this.searchForm.search) {
+    search.maxPrice = this.searchForm.search;
+  }
+
+  if (this.searchForm.column == 'minPrice' && this.searchForm.search) {
+    search.minPrice = this.searchForm.search;
+  }
+
+  if (this.searchForm.isRented && this.searchForm.isNotRented) {
+
+  } if (this.searchForm.isRented && !this.searchForm.isNotRented) {
+    search.isRented = true;
+  } else if (this.searchForm.isNotRented && !this.searchForm.isRented) {
+    search.isRented = false;
+  }
+
+  this.carService.searchCars(search).subscribe(data => {
+    this.cars = data;
+    this.total = this.cars.length;
+    this.updatePage();  
+  });
+}
+
 
   getAllCars(): void {
     this.carService.getAllCars().subscribe(data => {

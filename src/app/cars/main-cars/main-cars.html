@@ -9,12 +9,26 @@
     </div>
 
     <select class="form-select searchSelect" name="column" #searchText="ngModel" [(ngModel)]="searchForm.column"
-      required>
+      required (change)="searchCars()">
       <option value="brand">Marka</option>
       <option value="model">Model</option>
       <option value="maxPrice">Max cena</option>
       <option value="minPrice">Min cena</option>
     </select>
+    
+    <div class="div">
+      <div class="form-check form-switch mb-3">
+        <input id="isRented" name="isRented" type="checkbox" class="form-check-input"
+          [(ngModel)]="searchForm.isRented" (change)="searchCars()">
+        <label class="form-check-label" for="isRented">Samochody wynajęte</label>
+      </div>
+
+      <div class="form-check form-switch mb-3">
+        <input id="isNotRented" name="isNotRented" type="checkbox" class="form-check-input"
+          [(ngModel)]="searchForm.isNotRented" (change)="searchCars()">
+        <label class="form-check-label" for="isNotRented">Samochody nie wynajęte</label>
+      </div>
+    </div>
   </form>
 
   @if (pagedCars.length > 0) {
@@ -22,7 +36,7 @@
 
   <div class="grid">
     @for (car of pagedCars; track car) {
-    <div [routerLink]="['/view-car', car.id]" class="carCard">
+    <div [routerLink]="['/view-car', car.id]" class="carCard" [class.rented]="car.isRented">
       <div class="carRow">
         <p class="gray">marka:</p>
         <p class="bold">{{car.brand}}</p>
@@ -35,14 +49,20 @@
         <p class="gray">cena:</p>
         <p class="bold">{{car.price + ' zł/h'}}</p>
       </div>
+
       <div class="d-grid gap-2">
-        <button class="btn btn-outline-secondary" type="button">Zobacz szczegóły</button>
+        <div class="statusBadge" [class.active]="car.isRented" aria-hidden="true">
+          <span class="material-symbols-outlined">
+            {{ car.isRented ? 'lock' : 'check_circle' }}
+          </span>
+          {{ car.isRented ? ' wynajęty ' : ' dostępny ' }}
+        </div>
+        <button class="btn btn-outline-secondary seeMoreBtn" type="button">Zobacz szczegóły</button>
       </div>
     </div>
     }
   </div>
-  }
-  @else {
+  } @else {
   <p class="noResults">Brak wyników</p>
   }
 

@@ -98,6 +98,60 @@ section {
         opacity: 1;
       }
     }
+
+    .form-check.form-switch {
+    padding-left: 3.2rem;
+
+    .form-check-input {
+      width: 2.5rem;
+      height: 1.25rem;
+      margin-left: -3.2rem;
+      background-color: #1f2329;
+      border-color: #495057;
+      cursor: pointer;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+      background-image: none;
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0.2rem;
+        width: 0.9rem;
+        height: 0.9rem;
+        border-radius: 999px;
+        background-color: #adb5bd;
+        transform: translate(0, -50%);
+        transition: transform 0.2s ease, background-color 0.2s ease;
+      }
+
+      &:focus {
+        box-shadow: none;
+        border-color: #6c757d;
+      }
+
+      &:checked {
+        background-color: #6c757d;
+        border-color: #6c757d;
+
+        &::before {
+          transform: translate(0.95rem, -50%);
+          margin-left: 3px;
+          background-color: #f8f9fa;
+        }
+      }
+
+      &:hover {
+        border-color: #868e96;
+      }
+    }
+
+    .form-check-label {
+      color: #e9ecef;
+      cursor: pointer;
+    }
+  }
 	}
 
   .noResults {
@@ -138,6 +192,8 @@ section {
       flex-direction: column;
       justify-content: space-between;
       gap: 12px;
+      position: relative;
+      transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 
       .carRow {
         display: flex;
@@ -162,12 +218,64 @@ section {
         }
       }
 
+      .statusBadge {
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        font-size: 11px;
+        font-weight: 600;
+        border-radius: 6px;
+        padding: 6px 10px;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.08);
+        color: #e5e5e5;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+        .material-symbols-outlined {
+          font-size: 16px;
+          margin-right: 6px;
+        }
+
+        &.active {
+          background: rgba(255, 77, 77, 0.12);
+          border-color: rgba(255, 114, 114, 0.4);
+          color: rgba(255, 114, 114, 0.4);
+
+          .material-symbols-outlined {
+            color: #ff7676;
+          }
+        }
+
+        &:not(.active) {
+          background: rgba(122, 202, 138, 0.12);
+          border-color: rgba(122, 202, 138, 0.35);
+          color: rgba(122, 202, 138, 0.35);
+
+          .material-symbols-outlined {
+            color: #7aca8a;
+          }
+        }
+      }
+
+      .seeMoreBtn {
+        margin-top: 5px;
+        border: rgb(221, 220, 220) 1px solid;
+        color: rgb(221, 220, 220);
+      }
+
       .d-grid {
         margin-top: auto;
+        gap: 12px;
       }
 
       &:hover {
         background: rgba(128, 128, 128, 0.108);
+      }
+
+      &.rented {
+        border-color: rgba(255, 255, 255, 0.45);
       }
     }
   }
