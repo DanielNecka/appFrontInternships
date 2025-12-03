@@ -41,6 +41,7 @@ export class MainCars implements OnInit {
   searchCars() {
   let search: any = {};
 
+  //marka oraz model
   if (this.searchForm.column == 'brand' && this.searchForm.search) {
     search.brand = this.searchForm.search;
   }
@@ -49,14 +50,18 @@ export class MainCars implements OnInit {
     search.model = this.searchForm.search;
   }
 
-  if (this.searchForm.column == 'maxPrice' && this.searchForm.search) {
-    search.maxPrice = this.searchForm.search;
+
+  //cena
+  if (this.searchForm.minPrice) {
+    search.minPrice = this.searchForm.minPrice
   }
 
-  if (this.searchForm.column == 'minPrice' && this.searchForm.search) {
-    search.minPrice = this.searchForm.search;
+  if (this.searchForm.maxPrice) {
+    search.maxPrice = this.searchForm.maxPrice
   }
 
+
+  //status wypozyczenia
   if (this.searchForm.isRented && this.searchForm.isNotRented) {
 
   } if (this.searchForm.isRented && !this.searchForm.isNotRented) {
@@ -71,7 +76,6 @@ export class MainCars implements OnInit {
     this.updatePage();  
   });
 }
-
 
   getAllCars(): void {
     this.carService.getAllCars().subscribe(data => {
