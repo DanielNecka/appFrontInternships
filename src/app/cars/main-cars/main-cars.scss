@@ -95,14 +95,20 @@ section {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       grid-auto-rows: auto;
-      gap: 16px;
+      gap: 20px;
       align-items: start;
-      margin: 16px 0;
+      margin: 1px 0;
       width: 100%;
 
       label {
-        margin-top: 2px;
+        margin-top: 2.5px;
       }
+
+    input[type="text"] {
+      margin-top: -15px; 
+    }
+
+
     }
 
     @media (max-width: 900px) {

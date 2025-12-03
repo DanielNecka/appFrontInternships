@@ -13,15 +13,13 @@
       <option value="brand">Marka</option>
       <option value="model">Model</option>
     </select>
-    
+
     <div class="filterGrid">
       <div class="form-check form-switch mb-3">
-        <input id="isRented" name="isRented" type="checkbox" class="form-check-input"
-          [(ngModel)]="searchForm.isRented" (change)="searchCars()">
+        <input id="isRented" name="isRented" type="checkbox" class="form-check-input" [(ngModel)]="searchForm.isRented"
+          (change)="searchCars()">
         <label class="form-check-label" for="isRented">Samochody wynajęte</label>
       </div>
-
-
 
       <div class="form-check form-switch mb-3">
         <input id="isNotRented" name="isNotRented" type="checkbox" class="form-check-input"
@@ -29,11 +27,11 @@
         <label class="form-check-label" for="isNotRented">Samochody nie wynajęte</label>
       </div>
 
-            <input name="searchText" #searchText="ngModel" class="form-control searchBox" [(ngModel)]="searchForm.minPrice"
-          required pattern="^[0-9]{2,20}$" autocomplete="off" (keyup)="searchCars()" placeholder="Cena minimana">
+      <input type="text" name="searchText" #searchText="ngModel" class="form-control searchBox" [(ngModel)]="searchForm.minPrice"
+        required pattern="^[0-9]{2,20}$" autocomplete="off" (keyup)="searchCars()" placeholder="Cena minimana">
 
-      <input name="searchText" #searchText="ngModel" class="form-control searchBox" [(ngModel)]="searchForm.maxPrice"
-          required pattern="^[0-9]{2,20}$" autocomplete="off" (keyup)="searchCars()" placeholder="Cena maksymalna">
+      <input type="text" name="searchText" #searchText="ngModel" class="form-control searchBox" [(ngModel)]="searchForm.maxPrice"
+        required pattern="^[0-9]{2,20}$" autocomplete="off" (keyup)="searchCars()" placeholder="Cena maksymalna">
     </div>
   </form>
 

@@ -50,7 +50,6 @@ export class MainCars implements OnInit {
     search.model = this.searchForm.search;
   }
 
-
   //cena
   if (this.searchForm.minPrice) {
     search.minPrice = this.searchForm.minPrice
@@ -60,11 +59,10 @@ export class MainCars implements OnInit {
     search.maxPrice = this.searchForm.maxPrice
   }
 
-
   //status wypozyczenia
   if (this.searchForm.isRented && this.searchForm.isNotRented) {
 
-  } if (this.searchForm.isRented && !this.searchForm.isNotRented) {
+  } else if (this.searchForm.isRented && !this.searchForm.isNotRented) {
     search.isRented = true;
   } else if (this.searchForm.isNotRented && !this.searchForm.isRented) {
     search.isRented = false;
