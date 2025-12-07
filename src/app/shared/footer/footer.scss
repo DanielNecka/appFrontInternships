@@ -1,0 +1,17 @@
+footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: default;
+    user-select: none;
+
+    p {
+        width: 66%;
+
+        margin-bottom: 20px;
+
+        text-align: center;
+    }
+}

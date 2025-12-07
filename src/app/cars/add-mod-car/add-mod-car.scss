@@ -2,6 +2,7 @@ form {
   padding: 20px;
   background: #f9fbfd;
   color: #0d4e87;
+  border-radius: 15px;
 
   .input {
     background: #f9fbfd;
@@ -110,6 +111,63 @@ form {
       cursor: pointer;
     }
   }
+
+  button {
+    width: fit-content;
+
+    margin: 0;
+
+    padding: 10px 22px;
+
+    background-color: transparent;
+    border: 2px solid #0d4e87;
+
+    color: #0d4e87;
+    font-weight: 700;
+
+    transition: 0.5s;
+
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #0d4e87;
+    border-color: #0d4e87;
+
+    color: whitesmoke;
+
+    transition: 0.5s;
+  }
+
+  .btn-outline-secondary {
+    background-color: transparent;
+    border-color: #0d4e87;
+
+    color: #0d4e87;
+    font-weight: 700;
+  }
+
+  .btn-secondary {
+    background-color: #0d4e87;
+    border-color: #0d4e87;
+
+    color: whitesmoke;
+    font-weight: 700;
+  }
+
+  .btn-secondary:hover {
+    background-color: #0d4e87;
+    border-color: #0d4e87;
+
+    color: whitesmoke;
+
+    transition: 0.5s;
+  }
+
+}
+
+small {
+  margin-top: 5px;
 }
 
 label.text-danger {
@@ -146,4 +204,8 @@ input[type="number"] {
   background: rgba(13, 78, 135, 0.05);
   padding: 8px;
   object-fit: contain;
+}
+
+.modal-content {
+  border-radius: 100px !important;
 }

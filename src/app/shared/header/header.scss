@@ -1,6 +1,5 @@
 header {
     width: 100%;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -40,6 +39,7 @@ header {
 
     span:hover {
         color: #1a6cac;
+
         transition: 0.5s;
     }
 }
