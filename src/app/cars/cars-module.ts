@@ -5,6 +5,7 @@ import { ViewCar } from './view-car/view-car';
 import { AppRoutingModule } from "../app-routing-module";
 import { AddModCar } from './add-mod-car/add-mod-car';
 import { FormsModule } from '@angular/forms';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    NgbCollapseModule
   ]
 })
 export class CarsModule { }

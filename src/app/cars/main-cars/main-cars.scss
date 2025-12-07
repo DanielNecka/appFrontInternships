@@ -1,247 +1,165 @@
 section {
-  width: 90%;
-  margin: 25px 5%;
+  width: 100%;
+  padding: 0px 75px 50px 75px;
 
-  h2 {
-    margin: 10px 0 30px;
-    font-weight: 700;
-    color: #fff;
+  user-select: none;
+  .row {
+    display: flex;
+    gap: 20px;
+
+    input {
+      width: 50%;
+
+      color: #0d4e87;
+      font-weight: 700;
+      border: #0d4e87 solid 2px;
+    }
+
+    select {
+      width: fit-content;
+      
+      color: #0d4e87;
+      font-weight: 700;
+      border: #0d4e87 solid 2px;
+
+      cursor: pointer;
+    }
+
+    select:hover {
+      background-color: #0d4e87;
+      color: whitesmoke;
+
+      transition: 0.5s;
+    }
+
+    button {
+      width: fit-content;
+
+      color: #0d4e87;
+      font-weight: 700;
+      border: #0d4e87 solid 2px;
+
+      transition: 0.5s;
+
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0d4e87;
+      color: whitesmoke;
+
+      transition: 0.5s;
+    }
+
+    input,
+    select {
+      &:focus {
+        outline: none;      
+        box-shadow: none;    
+      }
+    }
+
+    input::placeholder {
+      color: #0d4e87;
+    }
   }
 
-	.searchForm {
-    width: 70%;
-    margin-bottom: 25px;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 12px;
+  .searchRow {
+    margin-bottom: 12px;
 
-    .searchField {
+    height: 3.5rem;
+  }
+
+  .filterBox {
+    width: fit-content;
+    margin-left: -12px;
+    padding-right: 20px;
+
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(2, 200px);
+      grid-template-rows: repeat(2);
+      gap: 20px;
       position: relative;
 
-      label {
-        position: absolute;
-        inset: 0;
+      input[type="text"] {
+        width: fit-content;
+        height: 3rem;
+
+        color: #0d4e87;
+        font-weight: 700;
+        border: #0d4e87 solid 2px;
+      }
+
+      input {
+        &:focus {
+          outline: none;      
+          box-shadow: none;    
+        }
+      }
+
+      input::placeholder {
+        color: #0d4e87;
+      }
+
+      .form-check-label {
+        margin-top: 3.5px;
+        font-size: 1.5rem;
+      }
+
+      .form-check {
         display: flex;
         align-items: center;
-        justify-content: flex-end;
-        padding-right: 12px;
-        color: #adb5bd;
-        font-size: 0.95rem;
-        pointer-events: none;
-        transition: color 0.2s ease, opacity 0.2s ease;
-        opacity: 0.85;
-      }
-
-      .searchBox {
-        width: 100%;
-        padding-right: 60px;
-      }
-
-      .searchBox:focus + label,
-      .searchBox:not(:placeholder-shown) + label,
-      .searchBox.ng-dirty + label {
-        color: #f1f1f1;
-        opacity: 1;
-      }
-    }
-
-    @media (max-width: 640px) {
-      width: 100%;
-      grid-template-columns: 1fr;
-
-      .searchSelect {
-        justify-self: stretch;
-        width: 100%;
-      }
-
-      .searchField label {
-        padding-right: 18px;
-      }
-
-      .searchBox {
-        padding-right: 48px;
-      }
-
-      .filterGrid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-
-        .form-control,
-        .form-select {
-          width: 100%;
-        }
-      }
-    }
-
-    @media (max-width: 480px) {
-      .filterGrid {
-        grid-template-columns: 1fr;
         gap: 10px;
-      }
-    }
-
-    .searchSelect {
-      width: auto;
-      min-width: fit-content;
-      white-space: nowrap;
-      justify-self: start;
-    }
-
-    .price {
-      width: 25%;
-    }
-
-    .filterGrid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      grid-auto-rows: auto;
-      gap: 20px;
-      align-items: start;
-      margin: 1px 0;
-      width: 100%;
-
-      label {
-        margin-top: 2.5px;
-      }
-
-    input[type="text"] {
-      margin-top: -15px; 
-    }
-
-
-    }
-
-    @media (max-width: 900px) {
-      .filterGrid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 14px;
-      }
-    }
-
-    .form-control,
-    .form-select {
-      background-color: #2f3338;
-      border: 1px solid #3c4045;
-      color: #f1f1f1;
-      transition: background-color 0.2s ease, border-color 0.2s ease;
-      
-        &.form-select,
-        &.searchSelect,
-        &.form-select:where(*) {
-          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3e%3cpath fill='%23ffffff' d='M1.41.59 6 5.17l4.59-4.58L12 2 6 8 0 2z'/%3e%3c/svg%3e");
-          background-repeat: no-repeat;
-          background-position: right 0.85rem center;
-          background-size: 12px;
-        }
-
-      &:focus {
-        background-color: #3a3f45;
-        border-color: #6c757d;
-        color: #ffffff;
-        box-shadow: none;
-      }
-
-      &::placeholder {
-        color: #bfc3c7;
-        opacity: 1;
-      }
-    }
-
-    .form-check.form-switch {
-    padding-left: 3.2rem;
-
-    .form-check-input {
-      width: 2.5rem;
-      height: 1.25rem;
-      margin-left: -3.2rem;
-      background-color: #1f2329;
-      border-color: #495057;
-      cursor: pointer;
-      transition: background-color 0.2s ease, border-color 0.2s ease;
-      background-image: none;
-      position: relative;
-
-      &::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 0.2rem;
-        width: 0.9rem;
-        height: 0.9rem;
-        border-radius: 999px;
-        background-color: #adb5bd;
-        transform: translate(0, -50%);
-        transition: transform 0.2s ease, background-color 0.2s ease;
-      }
-
-      &:focus {
-        box-shadow: none;
-        border-color: #6c757d;
-      }
-
-      &:checked {
-        background-color: #6c757d;
-        border-color: #6c757d;
-
-        &::before {
-          transform: translate(0.95rem, -50%);
-          margin-left: 3px;
-          background-color: #f8f9fa;
+        .form-check-input {
+          &:checked {
+            background-color: #0d4e87;
+            border-color: #0d4e87;
+          }
+          &:focus {
+            box-shadow: 0 0 0 0.25rem rgba(13, 78, 135, 0.25);
+            outline: none;
+            box-shadow: none
+          }
         }
       }
 
-      &:hover {
-        border-color: #868e96;
+      .form-check-input {
+        width: 2.5rem;  
+        height: 1.3rem; 
       }
-    }
-
-    .form-check-label {
-      color: #e9ecef;
-      cursor: pointer;
     }
   }
-	}
 
-  .noResults {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    width: 100%;
-    margin: 32px 0;
-    padding: 22px 24px;
-    border-radius: 12px;
-    border: 1px dashed rgba(108, 117, 125, 0.45);
-    background: rgba(52, 58, 64, 0.35);
-    color: #e2e6ea;
-    font-size: 1.05rem;
+  h2 {
+    margin-left: -12px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+
     font-weight: 600;
-
-    &::before {
-      content: '\26A0';
-      font-size: 1.5rem;
-      color: #adb5bd;
-    }
+    font-size: 50px;
   }
 
-  .grid {
+.grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 24px 20px;
+    gap: 20px 20px;
+    max-width: calc(220px * 5);
+    margin: 0 auto;
 
     .carCard {
       width: 100%;
       border-radius: 10px;
       box-sizing: border-box;
       padding: 20px;
-      border: 2px solid gray;
+      border: 2px solid #0d4e87;
       cursor: pointer;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       gap: 12px;
       position: relative;
-      transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+      transition: all 0.5s;
 
       .carRow {
         display: flex;
@@ -254,10 +172,7 @@ section {
         p {
           font-size: 20px;
           margin: 0;
-        }
-
-        .gray {
-          color: gray;
+          color: #0d4e87;
         }
 
         .bold {
@@ -268,7 +183,6 @@ section {
 
       .statusBadge {
         text-transform: uppercase;
-        letter-spacing: 0.04em;
         font-size: 11px;
         font-weight: 600;
         border-radius: 6px;
@@ -287,30 +201,37 @@ section {
         }
 
         &.active {
-          background: rgba(255, 77, 77, 0.12);
-          border-color: rgba(255, 114, 114, 0.4);
-          color: rgba(255, 114, 114, 0.4);
+          background: rgba(255, 77, 77, 0.339);
+          border-color: rgba(255, 114, 114, 0.838);
+          color: rgba(255, 114, 114, 0.838);
 
           .material-symbols-outlined {
-            color: #ff7676;
+            color: (255, 114, 114, 0.838);
           }
         }
 
         &:not(.active) {
-          background: rgba(122, 202, 138, 0.12);
-          border-color: rgba(122, 202, 138, 0.35);
-          color: rgba(122, 202, 138, 0.35);
+          background: rgba(122, 202, 138, 0.349);
+          border-color: rgb(122, 202, 138);
+          color: rgb(122, 202, 138);
 
           .material-symbols-outlined {
-            color: #7aca8a;
+            color: rgb(122, 202, 138);
           }
         }
       }
 
       .seeMoreBtn {
         margin-top: 5px;
-        border: rgb(221, 220, 220) 1px solid;
-        color: rgb(221, 220, 220);
+        border: #0d4e87 2px solid;
+        color: #0d4e87;
+        transition: 0.5s;
+      }
+
+      .seeMoreBtn:hover {
+        color: #e5e5e5;
+        background-color: #0d4e87;
+        transition: 0.5s;
       }
 
       .d-grid {
@@ -319,64 +240,15 @@ section {
       }
 
       &:hover {
-        background: rgba(128, 128, 128, 0.108);
+        background: #0d4e8707;
       }
 
       &.rented {
-        border-color: rgba(255, 255, 255, 0.45);
+        border-color: #0d4e8795;
       }
     }
   }
-
-  @media (max-width: 768px) {
-    margin: 20px auto;
-
-    .noResults {
-      margin: 24px 0;
-      padding: 18px 20px;
-      font-size: 1rem;
-      gap: 12px;
-    }
-
-    .grid {
-      gap: 20px 16px;
-
-      .carCard {
-        padding: 16px;
-
-        .carRow p {
-          font-size: 18px;
-        }
-      }
-    }
-  }
-
-    @media (max-width: 640px) {
-    width: 94%;
-    margin: 16px 3%;
-
-    .noResults {
-      width: 100%;
-      justify-content: center;
-      text-align: center;
-      font-size: 0.96rem;
-      padding: 14px 16px;
-    }
-
-    .grid {
-      gap: 16px;
-
-      .carCard {
-        padding: 14px;
-
-        .carRow p {
-          font-size: 16px;
-        }
-      }
-    }
-  }
-}
-
+   
 .paginator {
   position: relative;
   padding-top: 20px;
@@ -387,6 +259,28 @@ section {
   margin: 25px 0;
   user-select: none;
 
+  button {
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: 2px solid #0d4e87;
+    background-color: #0d4e87;
+    color: #f8f9fa;
+    font-weight: 700;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+
+    &:hover {
+      background-color: #0b3f6d;
+      border-color: #0b3f6d;
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 0.15rem rgba(13, 78, 135, 0.35);
+    }
+  }
+
   ul {
     position: absolute;
     left: 50%;
@@ -396,75 +290,70 @@ section {
     padding: 0;
     margin: 0;
     list-style: none;
-  }
 
-  li {
-    background: rgba(33, 37, 43, 0.85);
-    color: #f8f9fa;
-    padding: 8px 16px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
-    font-size: 14px;
-    min-width: 52px;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(4px);
-
-    &:hover {
-      background: rgba(73, 80, 87, 0.9);
-      border-color: rgba(255, 255, 255, 0.5);
-    }
-
-    &.current {
-      background: rgba(44, 48, 51, 0.95);
-      border-color: #8f8f90;
-      color: #8f8f90;
-      font-weight: 700;
-      cursor: default;
-    }
-
-    &.disabled {
-      opacity: 0.35;
-      cursor: default;
-      border-color: rgba(255, 255, 255, 0.2);
+    li {
+      background: #e9f3fb;
+      color: #0d4e87;
+      padding: 8px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+      font-size: 14px;
+      min-width: 52px;
+      text-align: center;
+      border: 2px solid #0d4e87;
 
       &:hover {
-        background: rgba(33, 37, 43, 0.85);
-        border-color: rgba(255, 255, 255, 0.2);
+        background: #0d4e87;
+        border-color: #0d4e87;
+        color: #ffffff;
+        transform: translateY(-1px);
+      }
+
+      &.current {
+        background: #0d4e87;
+        border-color: #0d4e87;
+        color: #ffffff;
+        font-weight: 700;
+        cursor: default;
+      }
+
+      &.disabled {
+        background: #f4f8fb;
+        color: #7d9ebd;
+        cursor: default;
+        border-color: #b7cfe3;
+        transform: none;
+
+        &:hover {
+          background: #f4f8fb;
+          border-color: #b7cfe3;
+          color: #7d9ebd;
+        }
       }
     }
   }
+}
 
-  @media (max-width: 640px) {
-    flex-direction: column;
-    align-items: center;
+.noResults {
+  margin-top: 30px;
+  width: 100%;
+  height: 400px;
+  margin-left: -12px;
+  border: rgba(255, 114, 114, 0.838) 2px dashed;
+  background-color: rgba(255, 77, 77, 0.339);
+  border-radius: 20px;
+  font-size: 80px;
 
-    button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  color: rgba(255, 114, 114, 0.838);
 
-    li {
-      margin: 0 4px;
-    }
-      margin: 0 auto 12px;
-    }
-
-    ul {
-      position: static;
-      transform: none;
-      margin-top: 16px;
-      justify-content: center;
-    }
+  span {
+    font-size: 80px;
+    color: rgba(255, 114, 114, 0.838);
   }
-
-  @media (max-width: 480px) {
-    ul {
-      width: 100%;
-      justify-content: center;
-    }
-
-    li {
-      min-width: auto;
-      flex: 0;
-    }
-  }
+}
 }

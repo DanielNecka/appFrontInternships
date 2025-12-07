@@ -1,37 +1,40 @@
 <section>
   <form class="searchForm">
-    <div class="searchField">
-      <input name="searchText" #searchText="ngModel" class="form-control searchBox" [(ngModel)]="searchForm.search"
-        required pattern="^[A-ź\s0-9-]{2,20}$" autocomplete="off" (keyup)="searchCars()">
-      <label for="searchText">
-        <span class="material-symbols-outlined">search</span>
-      </label>
+    <div class="row searchRow">
+      <input placeholder="Wyszukaj" name="searchText" #searchText="ngModel" class="form-control searchBox" [(ngModel)]="searchForm.search"
+      required pattern="^[A-ź\s0-9-]{2,20}$" autocomplete="off" (keyup)="searchCars()">
+      
+      <select class="form-select searchSelect" name="column" #searchText="ngModel" [(ngModel)]="searchForm.column"
+      required (change)="searchCars()">
+        <option value="brand">Marka</option>
+        <option value="model">Model</option>
+      </select>
+
+      <button type="button" class="btn btn-outline-primary" (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+        Filtry
+      </button>
     </div>
 
-    <select class="form-select searchSelect" name="column" #searchText="ngModel" [(ngModel)]="searchForm.column"
-      required (change)="searchCars()">
-      <option value="brand">Marka</option>
-      <option value="model">Model</option>
-    </select>
-
-    <div class="filterGrid">
-      <div class="form-check form-switch mb-3">
-        <input id="isRented" name="isRented" type="checkbox" class="form-check-input" [(ngModel)]="searchForm.isRented"
-          (change)="searchCars()">
-        <label class="form-check-label" for="isRented">Samochody wynajęte</label>
-      </div>
-
-      <div class="form-check form-switch mb-3">
-        <input id="isNotRented" name="isNotRented" type="checkbox" class="form-check-input"
-          [(ngModel)]="searchForm.isNotRented" (change)="searchCars()">
-        <label class="form-check-label" for="isNotRented">Samochody nie wynajęte</label>
-      </div>
-
-      <input type="text" name="searchText" #searchText="ngModel" class="form-control searchBox" [(ngModel)]="searchForm.minPrice"
+    <div class="filterBox" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+      <div class="filters">
+        <input type="text" name="searchText" #searchText="ngModel" class="form-control searchBox" [(ngModel)]="searchForm.minPrice"
         required pattern="^[0-9]{2,20}$" autocomplete="off" (keyup)="searchCars()" placeholder="Cena minimana">
 
-      <input type="text" name="searchText" #searchText="ngModel" class="form-control searchBox" [(ngModel)]="searchForm.maxPrice"
+        <input type="text" name="searchText" #searchText="ngModel" class="form-control searchBox" [(ngModel)]="searchForm.maxPrice"
         required pattern="^[0-9]{2,20}$" autocomplete="off" (keyup)="searchCars()" placeholder="Cena maksymalna">
+
+        <div class="form-check form-switch mb-3">
+          <input id="isRented" name="isRented" type="checkbox" class="form-check-input" [(ngModel)]="searchForm.isRented"
+          (change)="searchCars()">
+          <label class="form-check-label" for="isRented">Wynajęte</label>
+        </div>
+
+        <div class="form-check form-switch mb-3">
+          <input id="isNotRented" name="isNotRented" type="checkbox" class="form-check-input"
+          [(ngModel)]="searchForm.isNotRented" (change)="searchCars()">
+          <label class="form-check-label" for="isNotRented">Nie wynajęte</label>
+        </div>
+      </div>
     </div>
   </form>
 
@@ -42,15 +45,15 @@
     @for (car of pagedCars; track car) {
     <div [routerLink]="['/view-car', car.id]" class="carCard" [class.rented]="car.isRented">
       <div class="carRow">
-        <p class="gray">marka:</p>
+        <p>marka:</p>
         <p class="bold">{{car.brand}}</p>
       </div>
       <div class="carRow">
-        <p class="gray">model:</p>
+        <p>model:</p>
         <p class="bold">{{car.model}}</p>
       </div>
       <div class="carRow">
-        <p class="gray">cena:</p>
+        <p>cena:</p>
         <p class="bold">{{car.price + ' zł/h'}}</p>
       </div>
 
@@ -66,24 +69,27 @@
     </div>
     }
   </div>
-  } @else {
-  <p class="noResults">Brak wyników</p>
-  }
 
   <nav class="paginator" aria-label="Page navigation">
-    <button (click)="openModal('add', $event)" class="btn btn-outline-success" type="button" routerLink="/main-cars">
-      Dodaj Samochód
-    </button>
-    <ul>
-      <li (click)="prevPage()" [class.disabled]="page === 1">
-        ‹
-      </li>
+      <button (click)="openModal('add', $event)" class="btn btn-outline-success" type="button" routerLink="/main-cars">
+        Dodaj Samochód
+      </button>
+      <ul>
+        <li (click)="prevPage()" [class.disabled]="page === 1">
+          ‹
+        </li>
 
-      <li class="current">Strona {{page}}</li>
+        <li class="current">Strona {{page}}</li>
 
-      <li (click)="nextPage()" [class.disabled]="page * limit >= total">
-        ›
-      </li>
-    </ul>
-  </nav>
+        <li (click)="nextPage()" [class.disabled]="page * limit >= total">
+          ›
+        </li>
+      </ul>
+      <div></div>
+    </nav>
+  
+  }
+  @else {
+    <p class="noResults"><span class="material-symbols-outlined">error</span>Błąd pobrania samochodów</p>
+  } 
 </section>

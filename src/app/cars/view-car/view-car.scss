@@ -5,19 +5,19 @@ section {
 	h2 {
 		margin: 10px 0;
 		font-weight: 700;
-		color: #fff;
+		color: #0d4e87;
 	}
 
 	.tittle {
 		font-size: 20px;
-		color: gray;
+		color: #5a84a7;
 		margin-bottom: 30px;
 	}
 
 	.back {
 		background: transparent;
-		border: 1px solid gray;
-		color: #e1e1e1;
+		border: 1px solid #0d4e87;
+		color: #0d4e87;
 		padding: 8px 18px;
 		border-radius: 999px;
 		cursor: pointer;
@@ -25,13 +25,13 @@ section {
 		margin: 25px 0 20px;
 
 		&:hover {
-			background: rgba(128, 128, 128, 0.1);
+			background: rgba(13, 78, 135, 0.08);
 		}
 	}
 
 	.card {
-		background: #212529;
-		border: 2px solid gray;
+		background: #f9fbfd;
+		border: 2px solid #0d4e87;
 		border-radius: 16px;
 		padding: 25px;
 		width: 100%;
@@ -73,11 +73,11 @@ section {
 	.secondary {
 		h3 {
 			margin: 0 0 12px;
-			color: #fff;
+			color: #0d4e87;
 		}
 
 		p {
-			color: #c5c5c5;
+			color: #5a84a7;
 			margin-bottom: 16px;
 			line-height: 1.4;
 		}
@@ -89,11 +89,11 @@ section {
 
 			li {
 				margin-bottom: 8px;
-				color: #e3e3e3;
+				color: #0d4e87;
 
 				span {
 					font-weight: 600;
-					color: #fff;
+					color: #0b3f6d;
 				}
 			}
 		}
@@ -105,7 +105,7 @@ section {
 			border-radius: 12px;
 			overflow: hidden;
 			height: 240px;
-			background: #16171969;
+			background: #e8f2fb;
 			display: flex;
 			align-items: stretch;
 			justify-content: stretch;
@@ -125,7 +125,7 @@ section {
 
 		.caption {
 			margin: 16px 0 0;
-			color: #c5c5c5;
+			color: #5a84a7;
 			font-size: 15px;
 		}
 	}
@@ -145,21 +145,21 @@ section {
 		justify-content: space-between;
 		align-items: center;
 		padding: 12px 0;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+		border-bottom: 1px solid rgba(13, 78, 135, 0.12);
 
 		&:last-of-type {
 			border-bottom: none;
 		}
 
 		p {
-			color: gray;
+			color: #5a84a7;
 			font-size: 18px;
 			margin: 0;
 		}
 
 		.value {
 			font-weight: 600;
-			color: #fff;
+			color: #0d4e87;
 			font-size: 20px;
 		}
 	}
@@ -169,26 +169,27 @@ section {
 	border-radius: 20px;
 }
 
+
 .custom-modal {
-	background: #212529;
-	color: #fff;
+	background: #f9fbfd;
+	color: #0d4e87;
 
 	.modal-header {
-		border-bottom: 1px solid #444;
+		border-bottom: 1px solid #0d4e87;
 	}
 
 	.modal-body {
 		.main-text {
-			color: #fff;
+			color: #0d4e87;
 		}
 
 		.sub-text {
-			color: #a0a0a0;
+			color: #5a84a7;
 		}
 	}
 
 	.modal-footer {
-		border-top: 1px solid #444;
+		border-top: 1px solid #0d4e87;
 	}
 
 	.btn-close {

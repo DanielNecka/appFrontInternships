@@ -12,7 +12,9 @@ import { NgForm } from '@angular/forms';
   templateUrl: './main-cars.html',
   styleUrls: ['./main-cars.scss'],
 })
+
 export class MainCars implements OnInit {
+  isCollapsed = true;
   constructor(
     private readonly carService: CarsService,
     private readonly modalService: NgbModal
