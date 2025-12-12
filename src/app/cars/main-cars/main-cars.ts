@@ -5,6 +5,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddModCar } from '../add-mod-car/add-mod-car';
 import { SearchModel } from '../../models/search-model';
 import { NgForm } from '@angular/forms';
+import { Auth } from '../../auth/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-cars',
@@ -17,7 +19,9 @@ export class MainCars implements OnInit {
   isCollapsed = true;
   constructor(
     private readonly carService: CarsService,
-    private readonly modalService: NgbModal
+    private readonly modalService: NgbModal,
+    private readonly authService: Auth,
+    private readonly router: Router
   ) { }
 
   protected cars: CarModel[] = [];
@@ -26,6 +30,9 @@ export class MainCars implements OnInit {
   protected page: number = 1;
   protected limit: number = 8;
   protected total: number = 0;
+
+  protected rentedCars = 0;
+  protected availableCars = 0;
 
   protected searchForm: SearchModel = {
     search: '',
@@ -37,8 +44,20 @@ export class MainCars implements OnInit {
   CarInputForm!: CarModel;
 
   ngOnInit() {
-    this.getAllCars();
+    const isLoggedIn = this.authService.isLoggedIn();
+    
+    if (!isLoggedIn) {
+      this.router.navigate(['/login']);
+    } else {
+      this.searchCars();
+    }
   }
+
+  private countCars(): void {
+    this.rentedCars = this.cars.filter(c => c.isRented).length;
+    this.availableCars = this.cars.length - this.rentedCars;
+  }
+
 
   searchCars() {
   let search: any = {};
@@ -73,6 +92,8 @@ export class MainCars implements OnInit {
   this.carService.searchCars(search).subscribe(data => {
     this.cars = data;
     this.total = this.cars.length;
+    this.page = 1;
+    this.countCars(); 
     this.updatePage();  
   });
 }
@@ -81,6 +102,7 @@ export class MainCars implements OnInit {
     this.carService.getAllCars().subscribe(data => {
       this.cars = data;
       this.total = this.cars.length;
+      this.countCars(); 
       this.updatePage();
     })
   }
@@ -118,6 +140,7 @@ export class MainCars implements OnInit {
     modalRef.result.then(
       (result) => {
         this.page = 1;
+ 
         this.getAllCars();
       }
     );

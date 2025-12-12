@@ -1,4 +1,22 @@
 <section>
+  <div class="statsRow">
+    <div class="statCard">
+      <p class="label">Wszyskie</p>
+      <p class="value">{{ cars.length }}</p>
+      <p class="hint">samochody</p>
+    </div>
+    <div class="statCard">
+      <p class="label">Wynajęte</p>
+      <p class="value">{{ rentedCars }}</p>
+      <p class="hint">aktualnie niedostępne</p>
+    </div>
+    <div class="statCard">
+      <p class="label">Dostępne</p>
+      <p class="value">{{ availableCars }}</p>
+      <p class="hint">gotowe do wynajmu</p>
+    </div>
+  </div>
+
   <form class="searchForm">
     <div class="row searchRow">
       <input placeholder="Wyszukaj" name="searchText" #searchText="ngModel" class="form-control searchBox" [(ngModel)]="searchForm.search"

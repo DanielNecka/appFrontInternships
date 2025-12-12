@@ -1,0 +1,125 @@
+// Prosty formularz logowania bez kart i obramowań tła
+.login-section {
+	max-width: 520px;
+	margin: -80px auto 65px;
+	padding: 12px 20px 12px;
+
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.login-header {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+
+	h2 {
+		margin: 0;
+		font-size: 30px;
+		font-weight: 700;
+		color: #0d4e87;
+	}
+
+	p {
+		margin: 0;
+		color: #56789c;
+		font-weight: 500;
+	}
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+
+	.form-group {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	label {
+		font-weight: 700;
+		color: #0d4e87;
+		letter-spacing: 0.15px;
+	}
+
+	.form-control {
+		padding: 12px 14px;
+		border: 1px solid #0d4e87;
+		border-radius: 10px;
+
+		background: transparent;
+		color: #0d4e87;
+		font-weight: 600;
+
+		transition: border-color 0.2s ease, background-color 0.2s ease;
+
+		&::placeholder {
+			color: #6b8fb4;
+		}
+
+		&:focus {
+			outline: none;
+			border-color: #0b3f6d;
+			background-color: rgba(13, 78, 135, 0.06);
+			box-shadow: none;
+		}
+
+		&.is-invalid {
+			border-color: #dc3545;
+			color: #dc3545;
+			background-color: transparent;
+		}
+	}
+
+	.btn-secondary {
+		padding: 12px 16px;
+		width: 100%;
+
+		border-radius: 10px;
+		background-color: #0d4e87;
+		border-color: #0d4e87;
+
+		color: whitesmoke;
+		font-weight: 700;
+
+		transition: background-color 0.2s ease, transform 0.15s ease;
+
+		&:hover {
+			background-color: #0b3f6d;
+			border-color: #0b3f6d;
+			transform: translateY(-1px);
+		}
+
+		&:active {
+			transform: translateY(0);
+		}
+	}
+}
+
+small {
+	margin-top: 5px;
+	font-size: 0.95rem;
+	font-weight: 600;
+}
+
+label.text-danger {
+	color: #dc3545 !important;
+}
+
+.invalid-feedback {
+	color: #dc3545;
+}
+
+@media (max-width: 576px) {
+	.login-section {
+		margin-top: -8px;
+		padding: 12px 16px 12px;
+	}
+
+	.login-header h2 {
+		font-size: 26px;
+	}
+}

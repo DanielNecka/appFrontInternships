@@ -1,0 +1,53 @@
+<section class="login-section">
+    <div class="login-header">
+        <h2>Panel logowania</h2>
+        <p>Wprowadź dane, aby kontynuować.</p>
+    </div>
+
+    <form #formLogin="ngForm" (ngSubmit)="submitData(formLogin)" novalidate>
+        <div class="form-group">
+            <label
+                for="login"
+                [class.text-danger]="authError"
+            >Login</label>
+
+            <input
+                id="login"
+                name="login"
+                type="text"
+                ngModel
+                #loginCtrl="ngModel"
+                class="form-control"
+                placeholder="Wpisz login"
+                autocomplete="off"
+                (ngModelChange)="clearAuthError(formLogin)"
+                [ngClass]="{ 'is-invalid': authError }"
+            >
+        </div>
+
+        <div class="form-group">
+            <label
+                for="password"
+                [class.text-danger]="authError"
+            >Hasło</label>
+
+            <input
+                id="password"
+                name="password"
+                type="password"
+                ngModel
+                #passwordCtrl="ngModel"
+                class="form-control"
+                placeholder="Wpisz hasło"
+                autocomplete="off"
+                (ngModelChange)="clearAuthError(formLogin)"
+                [ngClass]="{ 'is-invalid': authError }"
+            >
+            @if (authError) {
+                <small class="text-danger invalid-feedback d-block">{{ authError }}</small>
+            }
+        </div>
+
+        <button class="btn btn-secondary" type="submit">Zaloguj</button>
+    </form>
+</section>

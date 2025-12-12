@@ -13,7 +13,28 @@
         <h1>Car Rental</h1>
     </div>
 
-    <div>
-        <span class="material-symbols-outlined">account_circle</span>
-    </div>
+    @if (isLoggedIn) {
+        <button class="account-trigger" type="button" (click)="openAccountModal($event)">
+            <span class="material-symbols-outlined">account_circle</span>
+        </button>
+
+        <ng-template #accountModal let-modal>
+            <div class="account-modal">
+                <div class="account-modal__header">
+                    <h3>Konto</h3>
+                    <button type="button" class="btn-close" aria-label="Zamknij" (click)="modal.dismiss()"></button>
+                </div>
+
+                <div class="account-modal__body">
+                    <p>Nazwa użytkownika: {{ userName || 'Nieznany użytkownik' }}</p>
+                    <p>Rola: {{ userRole || 'Brak roli' }}</p>
+                </div>
+
+                <div class="account-modal__footer">
+                    <button class="btn btn-outline-secondary" type="button" (click)="logOut(); modal.close()">Wyloguj</button>
+                    <button class="btn btn-secondary" type="button" (click)="modal.dismiss()">Wyjdź</button>
+                </div>
+            </div>
+        </ng-template>
+    }
 </header>

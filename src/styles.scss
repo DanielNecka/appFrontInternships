@@ -55,3 +55,11 @@ body {
 	font-family: "Roboto", sans-serif;
 	color: #0d4e87;
 }
+
+/* Global account modal shell to match add-mod-car */
+.account-modal-window .modal-content {
+  border-radius: 100px !important;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}

@@ -4,6 +4,7 @@ import { CarModel } from '../../models/car-model';
 import { CarsService } from '../cars-service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddModCar } from '../add-mod-car/add-mod-car';
+import { Auth } from '../../auth/auth';
 
 @Component({
   selector: 'app-view-car',
@@ -29,12 +30,19 @@ export class ViewCar implements OnInit {
     private readonly carService: CarsService,
     private readonly router: Router,
     private readonly modalService: NgbModal,
+    private readonly authService: Auth,
   ) {
     this.fallbackImage = `${this.carService.apiUrl}/uploads/car-images/placeholder-car.svg`;
   }
 
   ngOnInit(): void {
-    this.getCar();
+    const isLoggedIn = this.authService.isLoggedIn();
+    
+    if (!isLoggedIn) {
+      this.router.navigate(['/login']);
+    } else {
+      this.getCar();
+    }
   }
 
   getCar(): void {

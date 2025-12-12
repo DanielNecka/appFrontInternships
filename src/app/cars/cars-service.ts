@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CarModel } from '../models/car-model';
+import { Auth } from '../auth/auth';
+import { Router } from '@angular/router';
 
 export interface AddCarResponse {
   msg: string;
@@ -14,9 +16,17 @@ export interface AddCarResponse {
 export class CarsService {
   apiUrl = 'http://localhost:3000'
 
-  constructor(
-    private readonly http: HttpClient
-  ) {}
+  constructor (
+    private readonly http: HttpClient,
+    private readonly authService: Auth,
+    private readonly router: Router
+  ) {
+    this.bootstrapAuth();
+  }
+
+  private bootstrapAuth(): void {
+
+  }
 
   public getAllCars(): Observable<CarModel[]> {
     return this.http.get<CarModel[]>(`${this.apiUrl}/car`);

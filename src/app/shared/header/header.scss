@@ -5,6 +5,7 @@ header {
     align-items: center;
 
     padding: 64px 50px;
+    margin-bottom: 40px;
 
     user-select: none;
 
@@ -28,6 +29,19 @@ header {
         }
     }
 
+    .account-trigger {
+        background: transparent;
+        border: none;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .account-trigger:focus {
+        outline: none;
+    }
+
     span {
         font-weight: 100;
         font-size: 5rem;
@@ -35,11 +49,83 @@ header {
         transition: 0.5s;
 
         cursor: pointer;
+
+        color: #0d4e87;
     }
 
     span:hover {
         color: #1a6cac;
 
         transition: 0.5s;
+    }
+}
+
+.account-modal {
+    padding: 20px;
+    background: #f9fbfd;
+    color: #0d4e87;
+    border-radius: 15px;
+
+    h3 {
+        margin: 0;
+        font-weight: 700;
+        color: #0d4e87;
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 16px;
+
+        p {
+            margin: 0;
+            font-weight: 600;
+        }
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    .btn {
+        width: fit-content;
+        margin: 0;
+        padding: 10px 22px;
+        background-color: transparent;
+        border: 2px solid #0d4e87;
+        color: #0d4e87;
+        font-weight: 700;
+        transition: 0.5s;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: #0d4e87;
+        border-color: #0d4e87;
+        color: whitesmoke;
+    }
+
+    .btn-outline-secondary {
+        background-color: transparent;
+        border-color: #0d4e87;
+        color: #0d4e87;
+        font-weight: 700;
+    }
+
+    .btn-secondary {
+        background-color: #0d4e87;
+        border-color: #0d4e87;
+        color: whitesmoke;
+        font-weight: 700;
     }
 }

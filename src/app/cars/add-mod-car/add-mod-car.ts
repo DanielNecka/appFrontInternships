@@ -3,6 +3,8 @@ import { CarModel } from '../../models/car-model';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
 import { CarsService, AddCarResponse } from '../cars-service';
+import { Auth } from '../../auth/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-mod-car',
@@ -24,17 +26,24 @@ export class AddModCar implements OnInit {
   constructor(
     public readonly activateModal: NgbActiveModal,
     private readonly carsService: CarsService,
+        private readonly authService: Auth,
+    private readonly router: Router
   ) { }
 
   ngOnInit(): void {
-    this.CarInputForm = this.car
-      ? { ...this.car, isRented: this.car.isRented ?? false }
-      : { brand: '', model: '', price: 0, isRented: false, fuelType: '' };
+        const isLoggedIn = this.authService.isLoggedIn();
+    
+    if (!isLoggedIn) {
+      this.router.navigate(['/login']);
+    } else {
+      this.CarInputForm = this.car
+        ? { ...this.car, isRented: this.car.isRented ?? false }
+        : { brand: '', model: '', price: 0, isRented: false, fuelType: '' };
 
-    if (!this.CarInputForm.fuelType) {
-      this.CarInputForm.fuelType = '';
+      if (!this.CarInputForm.fuelType) {
+        this.CarInputForm.fuelType = '';
+      }
     }
-
   }
 
   onSave(formData: NgForm): void {
